@@ -5,6 +5,7 @@ import './createPage.scss';
 import Question from '../question/question';
 import Solution from '../solution/solution';
 import AddQuestion from '../addQuestion/addQuestion';
+import Generate from '../generate/generate';
 
 export default function CreatePage() {
 	return (
@@ -13,6 +14,7 @@ export default function CreatePage() {
 			<Solution />
 			<Solution />
 			<AddQuestion />
+			<Generate />
 		</form>
 	);
 }
