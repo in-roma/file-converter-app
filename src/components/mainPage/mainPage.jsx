@@ -4,8 +4,8 @@ import './createPage.scss';
 // Components
 import Question from '../question/question';
 import Solution from '../solution/solution';
-import AddQuestion from '../addQuestion/addQuestion';
-import Generate from '../generate/generate';
+import ControlQuestions from '../controlQuestions/controlQuestions';
+import CreateFileControl from '../createFileControl/createFileControl';
 
 export default function CreatePage() {
 	return (
@@ -13,8 +13,8 @@ export default function CreatePage() {
 			<Question />
 			<Solution />
 			<Solution />
-			<AddQuestion />
-			<Generate />
+			<ControlQuestions />
+			<CreateFileControl />
 		</form>
 	);
 }

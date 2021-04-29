@@ -3,13 +3,13 @@ import './App.scss';
 
 // Components
 import Header from './components/header/header';
-import CreatePage from './components/createPage/createPage';
+import MainPage from './components/mainPage/mainPage';
 
 function App() {
 	return (
 		<div className="App">
 			<Header />
-			<CreatePage />
+			<MainPage />
 		</div>
 	);
 }

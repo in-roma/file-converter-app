@@ -17,9 +17,7 @@
 	flex-flow: column;
 	justify-content: center;
 	align-items: center;
-	h2 {
-		font-size: 1.4rem;
-		font-weight: 500;
+	&:hover span {
 	}
 	.addQuestion-addIcon {
 		width: 1.8rem;
