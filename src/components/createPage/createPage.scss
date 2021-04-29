@@ -1,0 +1,13 @@
+.create-page {
+	// Element Size & Positionning
+	width: 100%;
+	height: 8rem;
+	grid-column: 2/3;
+	justify-self: flex-start;
+	align-self: center;
+	// Styling elements
+	border-bottom: 1px var(--color-border-light) solid;
+	// Child display
+	display: flex;
+	flex-flow: wrap;
+}

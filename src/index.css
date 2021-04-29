@@ -1,0 +1,15 @@
+:root {
+    --color-border-light: rgb(244, 244, 244);
+    --color-text-light: rgb(177, 177, 177);
+}
+
+html {
+    font-size: 62.5%; /* --> equivalent to 10px  */
+}
+
+body {
+    font-family: 'Helvetica', Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+
+}
+
