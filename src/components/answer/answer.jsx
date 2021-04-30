@@ -1,13 +1,14 @@
 import React from 'react';
 import './answer.scss';
 
-export default function Answer() {
+export default function Answer({ listOptions }) {
 	return (
 		<div className="answer">
 			<label>Answer:</label>
 			<select>
-				<option>Solution 1</option>
-				<option>Solution 2</option>
+				{listOptions.map((el, i) => (
+					<option key={'options' + i}>{i + 1}</option>
+				))}
 			</select>
 		</div>
 	);

@@ -34,5 +34,13 @@
 	.createFile-control-questions-mode {
 		font-size: 1.2rem;
 		margin-right: 1.6rem;
+		label {
+			margin-right: 0.4rem;
+		}
+		select {
+			font-size: 1.4rem;
+			border: none;
+			outline: none;
+		}
 	}
 }

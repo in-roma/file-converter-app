@@ -1,11 +1,11 @@
 import React from 'react';
-import './createFileControl.scss';
+import './controlCreate.scss';
 
 // Components
 
 import Button from '../button/button';
 
-export default function CreateFileControl() {
+export default function ControlCreate() {
 	return (
 		<div className="createFile-control">
 			<div className="createFile-control-counts">
@@ -14,7 +14,11 @@ export default function CreateFileControl() {
 			</div>
 			<div className="createFile-control-button">
 				<div className="createFile-control-questions-mode">
-					Select mode
+					<select>
+						<option>List View</option>
+						<option>Numbered</option>
+						<option>Lettered</option>
+					</select>
 				</div>
 				<Button buttonName="Generate File" />
 			</div>

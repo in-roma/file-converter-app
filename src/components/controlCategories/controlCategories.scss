@@ -7,8 +7,19 @@
 	align-items: center;
 	border-bottom: 1px var(--color-border-light) solid;
 	overflow-x: hidden;
-	span {
-		font-size: 1.3rem;
-		margin-left: 4rem;
-	}
+}
+
+.category {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.3rem;
+	margin-left: 4rem;
+}
+.category:hover {
+	font-weight: 500;
+}
+.category svg {
+	transform: scale(0.7);
 }
