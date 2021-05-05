@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useState } from 'react';
 import produce from 'immer';
 
 // Stylesheet
@@ -14,33 +14,47 @@ import ControlQuestions from '../controlQuestions/controlQuestions';
 import ControlCreate from '../controlCreate/controlCreate';
 
 export default function CreatePage() {
-	let initialState = {
-		id: 1,
-		categoryName: 'category1',
-		questions: [
-			{
-				id: 1,
-				question: '',
-				options: [
-					['option1', 1, ''],
-					['option2', 2, ''],
-					['option3', 3, ''],
-					['option4', 4, ''],
-				],
-				answer: 4,
-			},
-		],
-	};
+	let initialState = [
+		{
+			id: 1,
+			categoryName: 'category1',
+			questions: [
+				{
+					id: 1,
+					question: '',
+					options: [
+						['option1', 1, ''],
+						['option2', 2, ''],
+						['option3', 3, ''],
+						['option4', 4, ''],
+					],
+					answer: 4,
+				},
+			],
+		},
+	];
+	// Category displayed
+	const [category, setCategory] = useState(0);
+	// Question displayed
+	const [questionNumber, setQuestion] = useState(0);
+	// Dispatching actions
+	const [state, dispatch] = useReducer(optionReducer, initialState);
 
 	function optionReducer(state, action) {
 		console.log('this is action payload:', action.payload);
 		switch (action.type) {
 			case 'addOption':
-				if (state.questions[0].options.length < 9) {
+				if (
+					state[category].questions[questionNumber].options.length < 9
+				) {
 					let newOptions = produce(state, (draft) => {
-						draft.questions[0].options.push([
-							`option${state.questions[0].options.length + 1}`,
-							state.questions[0].options.length + 1,
+						draft[0].questions[questionNumber].options.push([
+							`option${
+								state[category].questions[questionNumber]
+									.options.length + 1
+							}`,
+							state[category].questions[questionNumber].options
+								.length + 1,
 							'',
 						]);
 					});
@@ -49,31 +63,53 @@ export default function CreatePage() {
 					return state;
 				}
 			case 'deleteOption':
-				if (state.questions[0].options.length > 2) {
+				if (
+					state[category].questions[questionNumber].options.length > 2
+				) {
 					let deleteOptions = produce(state, (draft) => {
-						draft.questions[0].options = draft.questions[0].options.filter(
-							(el) => el[0] !== action.payload
-						);
+						draft[category].questions[
+							questionNumber
+						].options = draft[category].questions[
+							questionNumber
+						].options.filter((el) => el[0] !== action.payload);
 					});
-
 					return deleteOptions;
 				} else {
 					return state;
 				}
+			case 'addQuestion':
+				if (state.length < 9) {
+					setQuestion(state[category].questions.length + 1);
+					return produce(state, (draft) => {
+						draft[category].questions.push({
+							id: state[category].questions.length + 1,
+							question: '',
+							options: [
+								['option1', 1, ''],
+								['option2', 2, ''],
+								['option3', 3, ''],
+								['option4', 4, ''],
+							],
+							answer: 4,
+						});
+					});
+				}
+
 			default:
 				return state;
 		}
 	}
 
-	const [state, dispatch] = useReducer(optionReducer, initialState);
-	useEffect(() => {}, []);
-
 	return (
 		<form className="create-page">
 			<ControlCategories />
-			<View />
-			<Question valueQuestion={state.questions[0].question} />
-			{state.questions[0].options.map((el) => (
+			<View newQuestion={() => dispatch({ type: 'addQuestion' })} />
+			<Question
+				valueQuestion={
+					state[category].questions[questionNumber].question
+				}
+			/>
+			{state[0].questions[questionNumber].options.map((el) => (
 				<Option
 					id={el[0]}
 					key={el[1]}
@@ -85,10 +121,15 @@ export default function CreatePage() {
 							payload: event.currentTarget.parentNode.id,
 						})
 					}
-					lastItem={state.questions[0].options.length === el[1]}
+					lastItem={
+						state[category].questions[questionNumber].options
+							.length === el[1]
+					}
 				/>
 			))}
-			<Answer listOptions={state.questions[0].options} />
+			<Answer
+				listOptions={state[category].questions[questionNumber].options}
+			/>
 			<ControlQuestions
 				addOption={() => dispatch({ type: 'addOption' })}
 			/>
