@@ -36,9 +36,26 @@ export default function CreatePage() {
 	// Category displayed
 	const [category, setCategory] = useState(0);
 	// Question displayed
-	const [questionNumber, setQuestion] = useState(0);
+	const [questionNumber, setQuestionNumber] = useState(0);
 	// Dispatching actions
 	const [state, dispatch] = useReducer(optionReducer, initialState);
+
+	// Display previous question
+	let goLeft = () => {
+		if (questionNumber !== 0) {
+			setQuestionNumber(questionNumber - 1);
+		} else {
+			setQuestionNumber(state[category].questions.length);
+		}
+	};
+	// Display next question
+	let goRight = () => {
+		if (questionNumber < state[category].questions.length) {
+			setQuestionNumber(questionNumber + 1);
+		} else {
+			setQuestionNumber(0);
+		}
+	};
 
 	function optionReducer(state, action) {
 		console.log('this is action payload:', action.payload);
@@ -78,11 +95,12 @@ export default function CreatePage() {
 					return state;
 				}
 			case 'addQuestion':
-				if (state.length < 9) {
-					setQuestion(state[category].questions.length + 1);
-					return produce(state, (draft) => {
+				if (state[category].questions.length < 9) {
+					setQuestionNumber(state[category].questions.length + 1);
+
+					let newQuestion = produce(state, (draft) => {
 						draft[category].questions.push({
-							id: state[category].questions.length + 1,
+							id: state[category].questions.length,
 							question: '',
 							options: [
 								['option1', 1, ''],
@@ -93,6 +111,8 @@ export default function CreatePage() {
 							answer: 4,
 						});
 					});
+					console.log('this is state:', state);
+					return newQuestion;
 				}
 
 			default:
@@ -103,7 +123,12 @@ export default function CreatePage() {
 	return (
 		<form className="create-page">
 			<ControlCategories />
-			<View newQuestion={() => dispatch({ type: 'addQuestion' })} />
+			<View
+				category={category}
+				questionNumber={questionNumber}
+				questionNumberTotal={state[category].questions.length}
+				newQuestion={() => dispatch({ type: 'addQuestion' })}
+			/>
 			<Question
 				valueQuestion={
 					state[category].questions[questionNumber].question
@@ -132,6 +157,8 @@ export default function CreatePage() {
 			/>
 			<ControlQuestions
 				addOption={() => dispatch({ type: 'addOption' })}
+				goRight={goRight}
+				goLeft={goLeft}
 			/>
 			<ControlCreate />
 		</form>
