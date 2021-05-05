@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import produce from 'immer';
 
 // Stylesheet
@@ -22,36 +22,43 @@ export default function CreatePage() {
 				id: 1,
 				question: '',
 				options: [
-					['option0', ''],
-					['option1', ''],
-					['option2', ''],
-					['option3', ''],
+					['option1', 1, ''],
+					['option2', 2, ''],
+					['option3', 3, ''],
+					['option4', 4, ''],
 				],
 				answer: 4,
 			},
 		],
 	};
+
 	function optionReducer(state, action) {
 		console.log('this is action payload:', action.payload);
 		switch (action.type) {
 			case 'addOption':
 				if (state.questions[0].options.length < 9) {
-					return produce(state, (draft) => {
+					let newOptions = produce(state, (draft) => {
 						draft.questions[0].options.push([
-							`option${state.questions[0].options.length - 1}`,
+							`option${state.questions[0].options.length + 1}`,
+							state.questions[0].options.length + 1,
 							'',
 						]);
 					});
+					return newOptions;
 				} else {
 					return state;
 				}
 			case 'deleteOption':
 				if (state.questions[0].options.length > 2) {
-					return produce(state, (draft) => {
-						draft.questions[0].options.filter(
+					let deleteOptions = produce(state, (draft) => {
+						draft.questions[0].options = draft.questions[0].options.filter(
 							(el) => el[0] !== action.payload
 						);
 					});
+
+					return deleteOptions;
+				} else {
+					return state;
 				}
 			default:
 				return state;
@@ -59,26 +66,26 @@ export default function CreatePage() {
 	}
 
 	const [state, dispatch] = useReducer(optionReducer, initialState);
-
-	// Add new Option
+	useEffect(() => {}, []);
 
 	return (
 		<form className="create-page">
 			<ControlCategories />
-
+			<View />
 			<Question valueQuestion={state.questions[0].question} />
-			{state.questions[0].options.map((el, i) => (
+			{state.questions[0].options.map((el) => (
 				<Option
-					id={'option' + i}
-					key={'option' + i}
-					optionNumber={i + 1}
-					optionValue={el[1]}
+					id={el[0]}
+					key={el[1]}
+					optionNumber={el[1]}
+					optionValue={el[2]}
 					deleteOption={(event) =>
 						dispatch({
 							type: 'deleteOption',
 							payload: event.currentTarget.parentNode.id,
 						})
 					}
+					lastItem={state.questions[0].options.length === el[1]}
 				/>
 			))}
 			<Answer listOptions={state.questions[0].options} />

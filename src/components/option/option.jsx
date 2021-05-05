@@ -7,16 +7,17 @@ export default function Option({
 	optionValue,
 	deleteOption,
 	id,
+	lastItem,
 }) {
 	return (
-		<div className="option" id={id}>
+		<div className="option" id={id} lastItem={lastItem}>
 			<label>Option {optionNumber}:</label>
 			<input
 				type="text"
 				value={optionValue}
 				placeholder="Type your solution here."
 			></input>
-			<IconDelete onClick={deleteOption} />
+			{lastItem && <IconDelete onClick={deleteOption} />}
 		</div>
 	);
 }
