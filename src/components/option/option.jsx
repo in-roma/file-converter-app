@@ -10,7 +10,7 @@ export default function Option({
 	lastItem,
 }) {
 	return (
-		<div className="option" id={id} lastItem={lastItem}>
+		<div className="option" name="option" id={id} lastItem={lastItem}>
 			<label>Option {optionNumber}:</label>
 			<input
 				type="text"

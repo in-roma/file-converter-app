@@ -3,7 +3,7 @@ import './question.scss';
 
 export default function Question({ valueQuestion }) {
 	return (
-		<div className="question">
+		<div className="question" name="question">
 			<label>Question:</label>
 			<input
 				type="text"

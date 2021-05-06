@@ -13,32 +13,32 @@ import Answer from '../answer/answer';
 import ControlQuestions from '../controlQuestions/controlQuestions';
 import ControlCreate from '../controlCreate/controlCreate';
 
+// Data initial state
+let initialState = [
+	{
+		id: 1,
+		categoryName: 'category1',
+		questions: [
+			{
+				id: 1,
+				question: '',
+				options: [
+					['option1', 1, ''],
+					['option2', 2, ''],
+					['option3', 3, ''],
+					['option4', 4, ''],
+				],
+				answer: 4,
+			},
+		],
+	},
+];
+
 export default function CreatePage() {
-	let initialState = [
-		{
-			id: 1,
-			categoryName: 'category1',
-			questions: [
-				{
-					id: 1,
-					question: '',
-					options: [
-						['option1', 1, ''],
-						['option2', 2, ''],
-						['option3', 3, ''],
-						['option4', 4, ''],
-					],
-					answer: 4,
-				},
-			],
-		},
-	];
 	// Category displayed
 	const [category, setCategory] = useState(0);
 	// Question displayed
 	const [questionNumber, setQuestionNumber] = useState(0);
-	// Dispatching actions
-	const [state, dispatch] = useReducer(optionReducer, initialState);
 
 	// Display previous question
 	let goLeft = () => {
@@ -56,6 +56,10 @@ export default function CreatePage() {
 			setQuestionNumber(0);
 		}
 	};
+
+	// Data state actions
+	// Dispatching actions
+	const [state, dispatch] = useReducer(optionReducer, initialState);
 
 	function optionReducer(state, action) {
 		console.log('this is action payload:', action.payload);
@@ -114,7 +118,22 @@ export default function CreatePage() {
 					console.log('this is state:', state);
 					return newQuestion;
 				}
+			case 'handleChange':
+				let value = action.payload.value;
+				let name = action.payload.name;
+				let id = action.payload.id;
+				let inputField = produce(state, (draft) => {
+					if (name === 'question') {
+						draft[category].questions[questionNumber].name = value;
+					}
+					if (name === 'option') {
+						draft[category].questions[questionNumber].options[
+							parseInt(id.slice(-1))
+						][2] = value;
+					}
+				});
 
+				return inputField;
 			default:
 				return state;
 		}
@@ -130,8 +149,11 @@ export default function CreatePage() {
 				newQuestion={() => dispatch({ type: 'addQuestion' })}
 			/>
 			<Question
-				valueQuestion={
-					state[category].questions[questionNumber].question
+				onChange={(event) =>
+					dispatch({
+						type: 'handleChange',
+						payload: event,
+					})
 				}
 			/>
 			{state[0].questions[questionNumber].options.map((el) => (
@@ -160,7 +182,7 @@ export default function CreatePage() {
 				goRight={goRight}
 				goLeft={goLeft}
 			/>
-			<ControlCreate />
+			<ControlCreate totalCategory={state[category].questions.length} />
 		</form>
 	);
 }
