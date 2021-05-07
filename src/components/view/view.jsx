@@ -7,7 +7,6 @@ import Button from '../button/button';
 export default function View({
 	category,
 	questionNumber,
-	questionNumberTotal,
 	newQuestion,
 	questions,
 	selectQuestion,
@@ -15,13 +14,7 @@ export default function View({
 	return (
 		<React.Fragment>
 			<div className="view-bar">
-				<span>
-					Category {category + 1} - Question N°{questionNumber + 1}/
-					{questionNumberTotal}
-				</span>
-				<div className="view-btn" onClick={newQuestion}>
-					<Button buttonName="New Question" />
-				</div>
+				<span>Category {parseInt(category) + 1}</span>
 			</div>
 			<div className="view-questions">
 				{questions.map((el) => (
@@ -32,11 +25,15 @@ export default function View({
 								: 'question-btn'
 						}
 						id={parseInt(el.id + 1)}
+						key={`questionBtn${el.id + 1}`}
 						onClick={selectQuestion}
 					>
 						<span>question {el.id + 1}</span>
 					</div>
 				))}
+				<div className="view-btn" onClick={newQuestion}>
+					<Button buttonName="New Question" />
+				</div>
 			</div>
 		</React.Fragment>
 	);

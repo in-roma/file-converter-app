@@ -16,7 +16,7 @@ import ControlCreate from '../controlCreate/controlCreate';
 // Data initial state
 let initialState = [
 	{
-		id: 1,
+		id: 0,
 		categoryName: 'category1',
 		questions: [
 			{
@@ -56,10 +56,19 @@ export default function CreatePage() {
 			setQuestionNumber(0);
 		}
 	};
+	// Select Category
+	let selectCategory = (event) => {
+		let selectValue = event.currentTarget.id;
+		console.log('this selectValue: ', selectValue);
+		setQuestionNumber(0);
+		setCategory(selectValue);
+	};
+
 	// Select Question
 	let selectQuestion = (event) => {
 		let selectValue = event.currentTarget.id;
 		console.log('this selectValue: ', selectValue);
+
 		setQuestionNumber(selectValue - 1);
 	};
 
@@ -70,6 +79,36 @@ export default function CreatePage() {
 	function optionReducer(state, action) {
 		console.log('this is action payload:', action.payload);
 		switch (action.type) {
+			case 'addCategory':
+				if (state.length < 9) {
+					setCategory(state.length);
+					setQuestionNumber(0);
+
+					let newCategory = produce(state, (draft) => {
+						draft.push({
+							id: `${state.length}`,
+							categoryName: `category${
+								parseInt(state.length) + 1
+							}`,
+							questions: [
+								{
+									id: 0,
+									question: '',
+									options: [
+										['option1', 1, ''],
+										['option2', 2, ''],
+										['option3', 3, ''],
+										['option4', 4, ''],
+									],
+									answer: 1,
+								},
+							],
+						});
+					});
+					return newCategory;
+				} else {
+					return state;
+				}
 			case 'handleChange':
 				let value = action.payload.value;
 				let name = action.payload.name;
@@ -130,11 +169,11 @@ export default function CreatePage() {
 			case 'addQuestion':
 				console.log('add question before');
 				if (state[category].questions.length < 9) {
-					setQuestionNumber(questionNumber + 1);
+					setQuestionNumber(state[category].questions.length);
 					console.log('questionNumber is now:', questionNumber);
 					let newQuestion = produce(state, (draft) => {
 						draft[category].questions.push({
-							id: parseInt(questionNumber) + 1,
+							id: state[category].questions.length,
 							question: '',
 							options: [
 								['option1', 1, ''],
@@ -158,7 +197,12 @@ export default function CreatePage() {
 	console.log(state);
 	return (
 		<form className="create-page">
-			<ControlCategories />
+			<ControlCategories
+				addCategory={() => dispatch({ type: 'addCategory' })}
+				category={category}
+				categories={state}
+				selectCategory={selectCategory}
+			/>
 			<View
 				category={category}
 				questionNumber={questionNumber}

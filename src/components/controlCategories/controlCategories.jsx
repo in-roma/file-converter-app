@@ -2,24 +2,42 @@ import React from 'react';
 import './controlCategories.scss';
 
 //Components
-import { ReactComponent as IconDelete } from '../../assets/icons/delete-button-icon.svg';
 import Button from '../button/button';
 
-export default function ControlCategories() {
+export default function ControlCategories({
+	category,
+	categories,
+	addCategory,
+	selectCategory,
+}) {
 	return (
 		<div className="controlCategories-bar">
-			<Button buttonName="Create Category" />
-			<div className="category">
-				<span>Category 01 </span>
-				<IconDelete />
-			</div>
-			<div className="category">
-				<span>Category 02 </span>
-				<IconDelete />
-			</div>
-			<div className="category">
-				<span>Category 03 </span> <IconDelete />
-			</div>
+			<Button buttonName="Create Category" onClick={addCategory} />
+			{categories.map((el) => (
+				<div
+					id={el.id}
+					key={`category${el.id}`}
+					onClick={selectCategory}
+					className={
+						category === el.id
+							? 'category-btn-selected'
+							: 'category-btn'
+					}
+				>
+					<span>Category {parseInt(el.id) + 1} </span>
+				</div>
+			))}
 		</div>
 	);
 }
+
+// <div
+// className={
+// 	questionNumber === el.id
+// 		? 'question-btn-selected'
+// 		: 'question-btn'
+// }
+// id={parseInt(el.id + 1)}
+// key={`questionBtn${el.id + 1}`}
+// onClick={selectQuestion}
+// >
