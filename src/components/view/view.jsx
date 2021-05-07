@@ -9,16 +9,35 @@ export default function View({
 	questionNumber,
 	questionNumberTotal,
 	newQuestion,
+	questions,
+	selectQuestion,
 }) {
 	return (
-		<div className="view-bar">
-			<span>
-				Category {category + 1} - Question N°{questionNumber + 1}/
-				{questionNumberTotal}
-			</span>
-			<div className="view-btn">
-				<Button buttonName="New Question" onClick={newQuestion} />
+		<React.Fragment>
+			<div className="view-bar">
+				<span>
+					Category {category + 1} - Question N°{questionNumber + 1}/
+					{questionNumberTotal}
+				</span>
+				<div className="view-btn" onClick={newQuestion}>
+					<Button buttonName="New Question" />
+				</div>
 			</div>
-		</div>
+			<div className="view-questions">
+				{questions.map((el) => (
+					<div
+						className={
+							questionNumber === el.id
+								? 'question-btn-selected'
+								: 'question-btn'
+						}
+						id={parseInt(el.id + 1)}
+						onClick={selectQuestion}
+					>
+						<span>question {el.id + 1}</span>
+					</div>
+				))}
+			</div>
+		</React.Fragment>
 	);
 }

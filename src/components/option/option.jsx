@@ -4,7 +4,7 @@ import { ReactComponent as IconDelete } from '../../assets/icons/delete-button-i
 
 export default function Option({
 	optionNumber,
-	optionValue,
+	value,
 	deleteOption,
 	id,
 	lastitem,
@@ -15,13 +15,14 @@ export default function Option({
 			<label>Option {optionNumber}:</label>
 			<input
 				type="text"
-				value={optionValue}
+				value={value}
 				placeholder="Type your solution here."
 				onChange={onChange}
 				name="option"
 				id={id}
+				autoComplete="off"
 			></input>
-			{lastitem && <IconDelete onClick={deleteOption} />}
+			{lastitem ? <IconDelete onClick={deleteOption} /> : undefined}
 		</div>
 	);
 }

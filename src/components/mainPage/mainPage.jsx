@@ -20,7 +20,7 @@ let initialState = [
 		categoryName: 'category1',
 		questions: [
 			{
-				id: 1,
+				id: 0,
 				question: '',
 				options: [
 					['option1', 1, ''],
@@ -45,16 +45,22 @@ export default function CreatePage() {
 		if (questionNumber !== 0) {
 			setQuestionNumber(questionNumber - 1);
 		} else {
-			setQuestionNumber(state[category].questions.length);
+			setQuestionNumber(state[category].questions.length - 1);
 		}
 	};
 	// Display next question
 	let goRight = () => {
-		if (questionNumber < state[category].questions.length) {
+		if (questionNumber < state[category].questions.length - 1) {
 			setQuestionNumber(questionNumber + 1);
 		} else {
 			setQuestionNumber(0);
 		}
+	};
+	// Select Question
+	let selectQuestion = (event) => {
+		let selectValue = event.currentTarget.id;
+		console.log('this selectValue: ', selectValue);
+		setQuestionNumber(selectValue - 1);
 	};
 
 	// Data state actions
@@ -87,11 +93,12 @@ export default function CreatePage() {
 					}
 				});
 			case 'addOption':
+				console.log('add option before');
 				if (
 					state[category].questions[questionNumber].options.length < 9
 				) {
-					let newOptions = produce(state, (draft) => {
-						draft[0].questions[questionNumber].options.push([
+					let newOption = produce(state, (draft) => {
+						draft[category].questions[questionNumber].options.push([
 							`option${
 								state[category].questions[questionNumber]
 									.options.length + 1
@@ -101,7 +108,7 @@ export default function CreatePage() {
 							'',
 						]);
 					});
-					return newOptions;
+					return newOption;
 				} else {
 					return state;
 				}
@@ -121,21 +128,28 @@ export default function CreatePage() {
 					return state;
 				}
 			case 'addQuestion':
-				setQuestionNumber(questionNumber + 1);
-
-				return produce(state, (draft) => {
-					draft[category].questions.push({
-						id: questionNumber,
-						question: '',
-						options: [
-							['option1', 1, ''],
-							['option2', 2, ''],
-							['option3', 3, ''],
-							['option4', 4, ''],
-						],
-						answer: 1,
+				console.log('add question before');
+				if (state[category].questions.length < 9) {
+					setQuestionNumber(questionNumber + 1);
+					console.log('questionNumber is now:', questionNumber);
+					let newQuestion = produce(state, (draft) => {
+						draft[category].questions.push({
+							id: parseInt(questionNumber) + 1,
+							question: '',
+							options: [
+								['option1', 1, ''],
+								['option2', 2, ''],
+								['option3', 3, ''],
+								['option4', 4, ''],
+							],
+							answer: 1,
+						});
 					});
-				});
+					console.log('add question after');
+					return newQuestion;
+				} else {
+					return state;
+				}
 
 			default:
 				return state;
@@ -150,6 +164,8 @@ export default function CreatePage() {
 				questionNumber={questionNumber}
 				questionNumberTotal={state[category].questions.length}
 				newQuestion={() => dispatch({ type: 'addQuestion' })}
+				questions={state[category].questions}
+				selectQuestion={selectQuestion}
 			/>
 
 			<Question
@@ -166,6 +182,7 @@ export default function CreatePage() {
 					id={el[0]}
 					key={el[0]}
 					optionNumber={el[1]}
+					value={el[2]}
 					onChange={(event) =>
 						dispatch({
 							type: 'handleChange',
@@ -200,7 +217,7 @@ export default function CreatePage() {
 				goRight={goRight}
 				goLeft={goLeft}
 			/>
-			<ControlCreate totalCategory={state[category].questions.length} />
+			<ControlCreate totalCategory={state.length} />
 		</form>
 	);
 }
