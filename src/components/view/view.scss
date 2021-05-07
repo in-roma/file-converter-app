@@ -15,8 +15,6 @@
 .view-btn {
 	width: auto;
 	height: auto;
-	position: absolute;
-	right: 0rem;
 }
 
 .view-questions {
@@ -60,4 +58,19 @@
 	border-radius: 5%;
 	color: white;
 	background-color: black;
+}
+
+.delete-category-btn {
+	position: absolute;
+	right: 0;
+	width: auto;
+	height: auto;
+	border-bottom: 1px black solid;
+	span {
+		font-size: 1.1rem;
+		font-weight: 400;
+	}
+	span:hover {
+		font-weight: 600;
+	}
 }

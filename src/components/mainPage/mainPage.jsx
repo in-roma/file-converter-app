@@ -86,7 +86,7 @@ export default function CreatePage() {
 
 					let newCategory = produce(state, (draft) => {
 						draft.push({
-							id: `${state.length}`,
+							id: parseInt(state.length),
 							categoryName: `category${
 								parseInt(state.length) + 1
 							}`,
@@ -109,6 +109,18 @@ export default function CreatePage() {
 				} else {
 					return state;
 				}
+			case 'deleteCategory':
+				if (state.length > 1) {
+					let deleteCategory = produce(state, (draft) => {
+						console.log('this is category:', category);
+						draft.filter((el) => el.id !== parseInt(category));
+					});
+					setCategory(category - 1);
+					return deleteCategory;
+				} else {
+					return state;
+				}
+
 			case 'handleChange':
 				let value = action.payload.value;
 				let name = action.payload.name;
@@ -202,6 +214,7 @@ export default function CreatePage() {
 				category={category}
 				categories={state}
 				selectCategory={selectCategory}
+				deleteCategory={() => dispatch({ type: 'deleteCategory' })}
 			/>
 			<View
 				category={category}

@@ -12,7 +12,11 @@ export default function ControlCategories({
 }) {
 	return (
 		<div className="controlCategories-bar">
-			<Button buttonName="Create Category" onClick={addCategory} />
+			<Button
+				buttonName="Create Category"
+				onClick={addCategory}
+				className="create-category-btn"
+			/>
 			{categories.map((el) => (
 				<div
 					id={el.id}
@@ -30,14 +34,3 @@ export default function ControlCategories({
 		</div>
 	);
 }
-
-// <div
-// className={
-// 	questionNumber === el.id
-// 		? 'question-btn-selected'
-// 		: 'question-btn'
-// }
-// id={parseInt(el.id + 1)}
-// key={`questionBtn${el.id + 1}`}
-// onClick={selectQuestion}
-// >

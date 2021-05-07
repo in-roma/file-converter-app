@@ -6,6 +6,7 @@ import Button from '../button/button';
 
 export default function View({
 	category,
+	deleteCategory,
 	questionNumber,
 	newQuestion,
 	questions,
@@ -15,6 +16,9 @@ export default function View({
 		<React.Fragment>
 			<div className="view-bar">
 				<span>Category {parseInt(category) + 1}</span>
+				<div className="delete-category-btn" onClick={deleteCategory}>
+					<span>Delete category</span>
+				</div>
 			</div>
 			<div className="view-questions">
 				{questions.map((el) => (
