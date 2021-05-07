@@ -28,7 +28,7 @@ let initialState = [
 					['option3', 3, ''],
 					['option4', 4, ''],
 				],
-				answer: 4,
+				answer: 1,
 			},
 		],
 	},
@@ -64,6 +64,28 @@ export default function CreatePage() {
 	function optionReducer(state, action) {
 		console.log('this is action payload:', action.payload);
 		switch (action.type) {
+			case 'handleChange':
+				let value = action.payload.value;
+				let name = action.payload.name;
+				let id = action.payload.id;
+
+				return produce(state, (draft) => {
+					if (name === 'question') {
+						draft[category].questions[
+							questionNumber
+						].question = value;
+					}
+					if (name === 'option') {
+						draft[category].questions[questionNumber].options[
+							parseInt(id.slice(-1) - 1)
+						][2] = value;
+					}
+					if (name === 'answer') {
+						draft[category].questions[
+							questionNumber
+						].answer = value;
+					}
+				});
 			case 'addOption':
 				if (
 					state[category].questions[questionNumber].options.length < 9
@@ -99,46 +121,27 @@ export default function CreatePage() {
 					return state;
 				}
 			case 'addQuestion':
-				if (state[category].questions.length < 9) {
-					setQuestionNumber(state[category].questions.length + 1);
+				setQuestionNumber(questionNumber + 1);
 
-					let newQuestion = produce(state, (draft) => {
-						draft[category].questions.push({
-							id: state[category].questions.length,
-							question: '',
-							options: [
-								['option1', 1, ''],
-								['option2', 2, ''],
-								['option3', 3, ''],
-								['option4', 4, ''],
-							],
-							answer: 4,
-						});
+				return produce(state, (draft) => {
+					draft[category].questions.push({
+						id: questionNumber,
+						question: '',
+						options: [
+							['option1', 1, ''],
+							['option2', 2, ''],
+							['option3', 3, ''],
+							['option4', 4, ''],
+						],
+						answer: 1,
 					});
-					console.log('this is state:', state);
-					return newQuestion;
-				}
-			case 'handleChange':
-				let value = action.payload.value;
-				let name = action.payload.name;
-				let id = action.payload.id;
-				let inputField = produce(state, (draft) => {
-					if (name === 'question') {
-						draft[category].questions[questionNumber].name = value;
-					}
-					if (name === 'option') {
-						draft[category].questions[questionNumber].options[
-							parseInt(id.slice(-1))
-						][2] = value;
-					}
 				});
 
-				return inputField;
 			default:
 				return state;
 		}
 	}
-
+	console.log(state);
 	return (
 		<form className="create-page">
 			<ControlCategories />
@@ -148,27 +151,34 @@ export default function CreatePage() {
 				questionNumberTotal={state[category].questions.length}
 				newQuestion={() => dispatch({ type: 'addQuestion' })}
 			/>
+
 			<Question
 				onChange={(event) =>
 					dispatch({
 						type: 'handleChange',
-						payload: event,
+						payload: event.target,
 					})
 				}
+				value={state[category].questions[questionNumber].question}
 			/>
-			{state[0].questions[questionNumber].options.map((el) => (
+			{state[category].questions[questionNumber].options.map((el) => (
 				<Option
 					id={el[0]}
-					key={el[1]}
+					key={el[0]}
 					optionNumber={el[1]}
-					optionValue={el[2]}
+					onChange={(event) =>
+						dispatch({
+							type: 'handleChange',
+							payload: event.target,
+						})
+					}
 					deleteOption={(event) =>
 						dispatch({
 							type: 'deleteOption',
 							payload: event.currentTarget.parentNode.id,
 						})
 					}
-					lastItem={
+					lastitem={
 						state[category].questions[questionNumber].options
 							.length === el[1]
 					}
@@ -176,7 +186,15 @@ export default function CreatePage() {
 			))}
 			<Answer
 				listOptions={state[category].questions[questionNumber].options}
+				value={state[category].questions[questionNumber].answer}
+				onChange={(event) =>
+					dispatch({
+						type: 'handleChange',
+						payload: event.target,
+					})
+				}
 			/>
+
 			<ControlQuestions
 				addOption={() => dispatch({ type: 'addOption' })}
 				goRight={goRight}
