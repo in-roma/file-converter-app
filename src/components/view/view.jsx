@@ -11,15 +11,26 @@ export default function View({
 	newQuestion,
 	questions,
 	selectQuestion,
+	renameCategory,
 }) {
 	return (
 		<React.Fragment>
 			<div className="view-bar">
-				<span>Category {parseInt(category) + 1}</span>
+				<div className="category-actions">
+					<span>Category {parseInt(category) + 1}</span>
+					<div
+						className="rename-category-btn"
+						onClick={renameCategory}
+					>
+						<span>Rename</span>
+					</div>
+				</div>
+
 				<div className="delete-category-btn" onClick={deleteCategory}>
 					<span>Delete category</span>
 				</div>
 			</div>
+
 			<div className="view-questions">
 				{questions.map((el) => (
 					<div
@@ -32,12 +43,11 @@ export default function View({
 						key={`questionBtn${el.id + 1}`}
 						onClick={selectQuestion}
 					>
-						<span>question {el.id + 1}</span>
+						<span>Question {el.id + 1}</span>
 					</div>
 				))}
-				<div className="view-btn" onClick={newQuestion}>
-					<Button buttonName="New Question" />
-				</div>
+
+				<Button buttonName="New Question" onClick={newQuestion} />
 			</div>
 		</React.Fragment>
 	);

@@ -9,10 +9,18 @@
 	border-bottom: 1px var(--color-border-light) solid;
 	// background-color: var(--color-background-light);
 	span {
-		font-size: 1.8rem;
+		font-size: 2rem;
+		line-height: 1.8rem;
 	}
 }
-.view-btn {
+.category-actions {
+	width: auto;
+	height: auto;
+
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-items: center;
 	width: auto;
 	height: auto;
 }
@@ -60,17 +68,31 @@
 	background-color: black;
 }
 
+.rename-category-btn {
+	width: auto;
+	height: auto;
+	margin: 0 1rem;
+	border-bottom: 1px black solid;
+	transform: translateY(0.3rem);
+	span {
+		font-size: 1rem;
+		font-weight: 400;
+	}
+}
+
 .delete-category-btn {
 	position: absolute;
 	right: 0;
 	width: auto;
 	height: auto;
+
 	border-bottom: 1px black solid;
+
 	span {
-		font-size: 1.1rem;
+		font-size: 1rem;
 		font-weight: 400;
 	}
-	span:hover {
-		font-weight: 600;
-	}
+	// span:hover {
+	// 	font-weight: 600;
+	// }
 }

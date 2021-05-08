@@ -1,7 +1,7 @@
 import React from 'react';
 import './question.scss';
 
-export default function Question({ value, onChange }) {
+export default function Question({ value, onChange, deleteQuestion, id }) {
 	return (
 		<div className="question">
 			<label>Question:</label>
@@ -11,7 +11,11 @@ export default function Question({ value, onChange }) {
 				value={value}
 				placeholder="Type your question here."
 				name="question"
+				id={id}
 			></input>
+			<div className="delete-category-btn" onClick={deleteQuestion}>
+				<span id={id}>Delete question</span>
+			</div>
 		</div>
 	);
 }

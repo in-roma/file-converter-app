@@ -1,9 +1,11 @@
 .question {
+	position: relative;
 	width: 100%;
 	height: 6rem;
 	display: flex;
 	flex-direction: nowrap;
 	align-items: center;
+	border-bottom: 1px var(--color-border-light) solid;
 
 	label {
 		width: 8rem;

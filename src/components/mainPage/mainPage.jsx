@@ -109,13 +109,17 @@ export default function CreatePage() {
 				} else {
 					return state;
 				}
+			case 'renameCategory':
 			case 'deleteCategory':
 				if (state.length > 1) {
 					let deleteCategory = produce(state, (draft) => {
-						console.log('this is category:', category);
-						draft.filter((el) => el.id !== parseInt(category));
+						draft.filter(
+							(el) => parseInt(el.id) !== parseInt(category)
+						);
+						setQuestionNumber(0);
+						setCategory(parseInt(state.length - 1));
 					});
-					setCategory(category - 1);
+
 					return deleteCategory;
 				} else {
 					return state;
@@ -185,7 +189,7 @@ export default function CreatePage() {
 					console.log('questionNumber is now:', questionNumber);
 					let newQuestion = produce(state, (draft) => {
 						draft[category].questions.push({
-							id: state[category].questions.length,
+							id: parseInt(state[category].questions.length),
 							question: '',
 							options: [
 								['option1', 1, ''],
@@ -198,6 +202,22 @@ export default function CreatePage() {
 					});
 					console.log('add question after');
 					return newQuestion;
+				} else {
+					return state;
+				}
+			case 'deleteQuestion':
+				if (state[category].questions.length > 1) {
+					let id = action.payload.id;
+
+					let deleteQuestion = produce(state, (draft) => {
+						draft[category].questions = draft[
+							category
+						].questions.filter(
+							(el) => parseInt(el.id) !== parseInt(id)
+						);
+					});
+					setQuestionNumber(0);
+					return deleteQuestion;
 				} else {
 					return state;
 				}
@@ -214,7 +234,6 @@ export default function CreatePage() {
 				category={category}
 				categories={state}
 				selectCategory={selectCategory}
-				deleteCategory={() => dispatch({ type: 'deleteCategory' })}
 			/>
 			<View
 				category={category}
@@ -223,6 +242,8 @@ export default function CreatePage() {
 				newQuestion={() => dispatch({ type: 'addQuestion' })}
 				questions={state[category].questions}
 				selectQuestion={selectQuestion}
+				renameCategory={() => dispatch({ type: 'renameCategory' })}
+				deleteCategory={() => dispatch({ type: 'deleteCategory' })}
 			/>
 
 			<Question
@@ -232,7 +253,14 @@ export default function CreatePage() {
 						payload: event.target,
 					})
 				}
+				deleteQuestion={(event) =>
+					dispatch({
+						type: 'deleteQuestion',
+						payload: event.target,
+					})
+				}
 				value={state[category].questions[questionNumber].question}
+				id={state[category].questions[questionNumber].id}
 			/>
 			{state[category].questions[questionNumber].options.map((el) => (
 				<Option
