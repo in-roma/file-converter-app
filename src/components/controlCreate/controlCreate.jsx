@@ -3,9 +3,7 @@ import './controlCreate.scss';
 
 // Components
 
-import Button from '../button/button';
-
-export default function ControlCreate({ totalCategory }) {
+export default function ControlCreate({ totalCategory, generateFile, href }) {
 	return (
 		<div className="createFile-control">
 			<div className="createFile-control-counts">
@@ -19,7 +17,15 @@ export default function ControlCreate({ totalCategory }) {
 						<option>Lettered</option>
 					</select>
 				</div>
-				<Button buttonName="Generate File" />
+
+				<a
+					className="generate-file-btn"
+					onClick={generateFile}
+					href={href}
+					download="quizz.text"
+				>
+					Generate file
+				</a>
 			</div>
 		</div>
 	);

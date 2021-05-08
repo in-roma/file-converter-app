@@ -1,5 +1,6 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer, useState, useEffect } from 'react';
 import produce from 'immer';
+import { saveAs } from 'file-saver';
 
 // Stylesheet
 import './createPage.scss';
@@ -226,6 +227,41 @@ export default function CreatePage() {
 				return state;
 		}
 	}
+	// Generate file
+	const [downloadLink, setDownloadLink] = useState('');
+	let generateFile = () => {
+		let formatingData = state.forEach(function (el, i1) {
+			let newStructure = el.categoryName + '\n';
+			// +
+			// el.questions.forEach(function (sub, i2) {
+			// 	return (
+			// 		i2 +
+			// 		1 +
+			// 		'' +
+			// 		sub.question +
+			// 		'Answer ' +
+			// 		sub.options.forEach(function (option, i3) {
+			// 			return i3 + '' + option;
+			// 		}) +
+			// 		sub.answer
+			// 	);
+			// });
+
+			return newStructure;
+		});
+		console.log('this formatted data', formatingData);
+		let data = new Blob([formatingData], {
+			type: 'text/plain;charset=utf-8',
+		});
+		if (downloadLink !== '') {
+			window.URL.revokeObjectURL(downloadLink);
+		}
+		setDownloadLink(window.URL.createObjectURL(data));
+	};
+	useEffect(() => {
+		generateFile();
+	}, [state]);
+
 	console.log(state);
 	return (
 		<form className="create-page">
@@ -302,7 +338,11 @@ export default function CreatePage() {
 				goRight={goRight}
 				goLeft={goLeft}
 			/>
-			<ControlCreate totalCategory={state.length} />
+			<ControlCreate
+				totalCategory={state.length}
+				generateFile={generateFile}
+				href={downloadLink}
+			/>
 		</form>
 	);
 }

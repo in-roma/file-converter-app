@@ -45,3 +45,19 @@
 		}
 	}
 }
+
+.generate-file-btn {
+	position: absolute;
+	right: 0;
+	border: 0.01rem black solid;
+	border-radius: 5%;
+	font-size: 1.2rem;
+	color: black;
+	padding: 0.4rem 1.4rem;
+	text-align: center;
+	text-decoration: none;
+	&:hover {
+		color: white;
+		background-color: black;
+	}
+}
