@@ -1,6 +1,5 @@
 import React, { useReducer, useState, useEffect } from 'react';
 import produce from 'immer';
-import { saveAs } from 'file-saver';
 
 // Stylesheet
 import './createPage.scss';
