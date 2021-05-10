@@ -113,13 +113,15 @@ export default function CreatePage() {
 			case 'deleteCategory':
 				if (state.length > 1) {
 					let deleteCategory = produce(state, (draft) => {
-						draft.filter(
-							(el) => parseInt(el.id) !== parseInt(category)
-						);
-						setQuestionNumber(0);
-						setCategory(parseInt(state.length - 1));
-					});
+						return draft.filter(function (el) {
+							console.log('this el.id', el.id);
+							console.log('this category', parseInt(category));
 
+							return el.id !== parseInt(category);
+						});
+					});
+					setQuestionNumber(0);
+					setCategory(0);
 					return deleteCategory;
 				} else {
 					return state;
@@ -209,15 +211,18 @@ export default function CreatePage() {
 				if (state[category].questions.length > 1) {
 					let id = action.payload.id;
 
-					let deleteQuestion = produce(state, (draft) => {
-						draft[category].questions = draft[
-							category
-						].questions.filter(
-							(el) => parseInt(el.id) !== parseInt(id)
+					let deleteOption = produce(state, (draft) => {
+						let optionsMinus = draft[category].questions.filter(
+							function (el) {
+								return el.id !== questionNumber;
+							}
 						);
+
+						draft[category].questions = optionsMinus;
 					});
+
 					setQuestionNumber(0);
-					return deleteQuestion;
+					return deleteOption;
 				} else {
 					return state;
 				}
