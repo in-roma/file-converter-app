@@ -10,14 +10,6 @@ export default function ControlCreate({ totalCategory, generateFile, href }) {
 				<span>Total of Categories: {totalCategory}</span>
 			</div>
 			<div className="createFile-control-button">
-				<div className="createFile-control-questions-mode">
-					<select>
-						<option>List View</option>
-						<option>Numbered</option>
-						<option>Lettered</option>
-					</select>
-				</div>
-
 				<a
 					className="generate-file-btn"
 					onClick={generateFile}

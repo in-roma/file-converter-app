@@ -10,9 +10,10 @@ export default function Option({
 	lastitem,
 	onChange,
 }) {
+	let letteredValues = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
 	return (
 		<div className="option" id={id} lastitem={lastitem}>
-			<label>Option {optionNumber}:</label>
+			<label>Option {letteredValues[optionNumber - 1]}:</label>
 			<input
 				type="text"
 				value={value}
