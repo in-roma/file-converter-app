@@ -12,12 +12,13 @@ export default function View({
 	questions,
 	selectQuestion,
 	renameCategory,
+	state,
 }) {
 	return (
 		<React.Fragment>
 			<div className="view-bar">
 				<div className="category-actions">
-					<span>Category {parseInt(category) + 1}</span>
+					<span>{state[category].categoryName}</span>
 					<div
 						className="rename-category-btn"
 						onClick={renameCategory}

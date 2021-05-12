@@ -5,7 +5,8 @@ import produce from 'immer';
 import './createPage.scss';
 
 // Components
-import ControlCategories from '../controlCategories/controlCategories';
+import Category from '../category/category';
+import Button from '../button/button';
 import View from '../view/view';
 import Question from '../question/question';
 import Option from '../option/option';
@@ -17,7 +18,7 @@ import ControlCreate from '../controlCreate/controlCreate';
 let initialState = [
 	{
 		id: 0,
-		categoryName: 'category1',
+		categoryName: 'Category 1',
 		questions: [
 			{
 				id: 0,
@@ -60,6 +61,7 @@ export default function CreatePage() {
 	let selectCategory = (event) => {
 		let selectValue = event.currentTarget.id;
 		console.log('this selectValue: ', selectValue);
+
 		setQuestionNumber(0);
 		setCategory(selectValue);
 	};
@@ -67,9 +69,9 @@ export default function CreatePage() {
 	// Select Question
 	let selectQuestion = (event) => {
 		let selectValue = event.currentTarget.id;
-		console.log('this selectValue: ', selectValue);
+		console.log('this selectValue ID: ', parseInt(selectValue));
 
-		setQuestionNumber(selectValue - 1);
+		setQuestionNumber(parseInt(selectValue) - 1);
 	};
 
 	// Data state actions
@@ -87,7 +89,7 @@ export default function CreatePage() {
 					let newCategory = produce(state, (draft) => {
 						draft.push({
 							id: parseInt(state.length),
-							categoryName: `category${
+							categoryName: `Category ${
 								parseInt(state.length) + 1
 							}`,
 							questions: [
@@ -112,17 +114,31 @@ export default function CreatePage() {
 			case 'renameCategory':
 			case 'deleteCategory':
 				if (state.length > 1) {
-					let deleteCategory = produce(state, (draft) => {
-						return draft.filter(function (el) {
-							console.log('this el.id', el.id);
-							console.log('this category', parseInt(category));
+					let categoryDeleted = parseInt(category);
 
-							return el.id !== parseInt(category);
+					let deleting = () => {
+						return produce(state, (draft) => {
+							return draft.filter(function (el, i) {
+								return el.id !== categoryDeleted;
+							});
 						});
-					});
-					setQuestionNumber(0);
+					};
+
+					let setNewIds = () => {
+						return produce(state, (draft) => {
+							return draft.forEach(function (el, i) {
+								el.id = i;
+							});
+						});
+					};
+
+					state = deleting();
+					state = setNewIds();
+
 					setCategory(0);
-					return deleteCategory;
+					setQuestionNumber(0);
+
+					return state;
 				} else {
 					return state;
 				}
@@ -209,20 +225,38 @@ export default function CreatePage() {
 				}
 			case 'deleteQuestion':
 				if (state[category].questions.length > 1) {
-					let id = action.payload.id;
+					let questionDeleted = parseInt(questionNumber);
+					console.log(
+						'this is questionDeleted selection:',
+						questionDeleted
+					);
+					let deleting = () => {
+						return produce(state, (draft) => {
+							draft[category].questions = draft[
+								category
+							].questions.filter(function (el, i) {
+								return el.id !== questionDeleted;
+							});
+						});
+					};
 
-					let deleteOption = produce(state, (draft) => {
-						let optionsMinus = draft[category].questions.filter(
-							function (el) {
-								return el.id !== questionNumber;
-							}
-						);
+					let setNewIds = () => {
+						return produce(state, (draft) => {
+							return draft[category].questions.forEach(function (
+								el,
+								i
+							) {
+								el.id = i;
+							});
+						});
+					};
 
-						draft[category].questions = optionsMinus;
-					});
+					state = deleting();
+					state = setNewIds();
 
 					setQuestionNumber(0);
-					return deleteOption;
+
+					return state;
 				} else {
 					return state;
 				}
@@ -269,13 +303,23 @@ export default function CreatePage() {
 	console.log(state);
 	return (
 		<form className="create-page">
-			<ControlCategories
-				addCategory={() => dispatch({ type: 'addCategory' })}
-				category={category}
-				categories={state}
-				selectCategory={selectCategory}
-			/>
+			<div className="controlCategories-bar">
+				{state.map((el) => (
+					<Category
+						selectCategory={selectCategory}
+						id={el.id}
+						category={category}
+						categoryName={el.categoryName}
+					/>
+				))}
+				<Button
+					buttonName="Create Category"
+					onClick={() => dispatch({ type: 'addCategory' })}
+				/>
+			</div>
+
 			<View
+				state={state}
 				category={category}
 				questionNumber={questionNumber}
 				questionNumberTotal={state[category].questions.length}
