@@ -11,7 +11,6 @@ export default function Category({
 		<div
 			id={id}
 			fakeId={0}
-			key={`category${id}`}
 			onClick={selectCategory}
 			className={
 				parseInt(category) === id

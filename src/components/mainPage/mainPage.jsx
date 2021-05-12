@@ -310,6 +310,7 @@ export default function CreatePage() {
 						id={el.id}
 						category={category}
 						categoryName={el.categoryName}
+						key={`category${el.id}`}
 					/>
 				))}
 				<Button
