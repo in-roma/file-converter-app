@@ -1,0 +1,102 @@
+.rename-Window {
+	width: 40rem;
+	height: 16rem;
+	position: fixed;
+	top: 8rem;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 5;
+	background-color: rgb(255, 255, 255);
+	color: black;
+	box-shadow: 0 11px 15px rgba(0, 0, 0, 0.029),
+		0 88px 120px rgba(0, 0, 0, 0.08);
+
+	.rename-Window-form {
+		width: auto;
+		height: auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 1.2rem 1.2rem;
+
+		.rename-window-header {
+			display: flex;
+		}
+
+		h1 {
+			color: black;
+			font-size: 1.8rem;
+			font-weight: 500;
+			padding: 0;
+			margin: 0;
+			align-self: center;
+		}
+		.rename-window-delete-Icon {
+			position: absolute;
+			right: 1.2rem;
+		}
+
+		.label-input-category-window {
+			display: flex;
+			flex-wrap: row nowrap;
+			width: 36.2rem;
+			margin-top: 2.8rem;
+			align-self: flex-start;
+			label {
+				width: 8.4rem;
+				color: black;
+				font-size: 1.2rem;
+			}
+			input {
+				width: 37rem;
+				margin-left: 0.4rem;
+				color: black;
+				font-size: 1.6rem;
+				width: 100%;
+				transform: translateY(-0.1rem);
+				//Styling
+				border: none;
+				outline: none;
+			}
+		}
+		.category-window-buttons {
+			position: relative;
+			display: flex;
+			flex-wrap: row nowrap;
+			align-self: flex-end;
+			justify-content: flex-end;
+			align-items: center;
+			justify-self: flex-end;
+			margin-top: 2.4rem;
+			.cancel-category-btn {
+				position: relative;
+				right: 0.4rem;
+				width: auto;
+				height: auto;
+				border-bottom: 1px black solid;
+
+				span {
+					font-size: 0.9rem;
+					font-weight: 400;
+					line-height: 0.2rem;
+				}
+			}
+
+			.rename-category-btn {
+				// position: absolute;
+				// right: 0;
+				border: 0.01rem black solid;
+				border-radius: 5%;
+				font-size: 1.2rem;
+				color: black;
+				padding: 0.4rem 1.4rem;
+				text-align: center;
+				&:hover {
+					color: white;
+					background-color: black;
+				}
+			}
+		}
+	}
+}

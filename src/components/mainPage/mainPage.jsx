@@ -13,6 +13,7 @@ import Option from '../option/option';
 import Answer from '../answer/answer';
 import ControlQuestions from '../controlQuestions/controlQuestions';
 import ControlCreate from '../controlCreate/controlCreate';
+import RenameWindow from '../renameWindow/renameWindow';
 
 // Data initial state
 let initialState = [
@@ -41,6 +42,23 @@ export default function CreatePage() {
 
 	// Question displayed
 	const [questionNumber, setQuestionNumber] = useState(0);
+
+	// Rename window
+	const [renameWindow, setRenameWindow] = useState(false);
+	let openWindow = () => {
+		setRenameWindow(true);
+	};
+	let closeWindow = () => {
+		setRenameWindow(false);
+	};
+
+	const [renameValue, setRenameValue] = useState('');
+
+	let renamingCategory = (event) => {
+		let renamingValue = event.target.value;
+		console.log(renamingValue);
+		setRenameValue(renamingValue);
+	};
 
 	// Display previous question
 	let goLeft = () => {
@@ -115,6 +133,12 @@ export default function CreatePage() {
 					return state;
 				}
 			case 'renameCategory':
+				return produce(state, (draft) => {
+					draft[category].categoryName = renameValue;
+					setRenameWindow(false);
+					setRenameValue('');
+				});
+
 			case 'deleteCategory':
 				console.log('this category before deleting: ', category);
 				if (state.length > 1) {
@@ -271,6 +295,7 @@ export default function CreatePage() {
 				return state;
 		}
 	}
+
 	// Generate file
 	const [downloadLink, setDownloadLink] = useState('');
 	let generateFile = () => {
@@ -340,9 +365,20 @@ export default function CreatePage() {
 				newQuestion={() => dispatch({ type: 'addQuestion' })}
 				questions={state[category].questions}
 				selectQuestion={selectQuestion}
-				renameCategory={() => dispatch({ type: 'renameCategory' })}
+				renameCategory={openWindow}
 				deleteCategory={() => dispatch({ type: 'deleteCategory' })}
-			/>
+			></View>
+
+			{renameWindow && (
+				<RenameWindow
+					key={state[category].categoryName + 'window'}
+					categoryName={state[category].categoryName}
+					value={renameValue}
+					onChange={renamingCategory}
+					closeWindow={closeWindow}
+					renameCategory={() => dispatch({ type: 'renameCategory' })}
+				/>
+			)}
 
 			<Question
 				onChange={(event) =>
