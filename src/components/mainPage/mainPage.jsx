@@ -29,7 +29,7 @@ let initialState = [
 					['option3', 3, ''],
 					['option4', 4, ''],
 				],
-				answer: 1,
+				answer: 'A',
 			},
 		],
 	},
@@ -38,6 +38,7 @@ let initialState = [
 export default function CreatePage() {
 	// Category displayed
 	const [category, setCategory] = useState(0);
+
 	// Question displayed
 	const [questionNumber, setQuestionNumber] = useState(0);
 
@@ -63,7 +64,8 @@ export default function CreatePage() {
 		console.log('this selectValue: ', selectValue);
 
 		setQuestionNumber(0);
-		setCategory(selectValue);
+		setCategory(parseInt(selectValue));
+		console.log('this category while select: ', category);
 	};
 
 	// Select Question
@@ -83,7 +85,7 @@ export default function CreatePage() {
 		switch (action.type) {
 			case 'addCategory':
 				if (state.length < 9) {
-					setCategory(state.length);
+					setCategory(parseInt(state.length));
 					setQuestionNumber(0);
 
 					let newCategory = produce(state, (draft) => {
@@ -102,23 +104,25 @@ export default function CreatePage() {
 										['option3', 3, ''],
 										['option4', 4, ''],
 									],
-									answer: 1,
+									answer: 'A',
 								},
 							],
 						});
 					});
+
 					return newCategory;
 				} else {
 					return state;
 				}
 			case 'renameCategory':
 			case 'deleteCategory':
+				console.log('this category before deleting: ', category);
 				if (state.length > 1) {
 					let categoryDeleted = parseInt(category);
 
 					let deleting = () => {
 						return produce(state, (draft) => {
-							return draft.filter(function (el, i) {
+							return draft.filter(function (el) {
 								return el.id !== categoryDeleted;
 							});
 						});
@@ -134,8 +138,8 @@ export default function CreatePage() {
 
 					state = deleting();
 					state = setNewIds();
+					setCategory(parseInt(state.length) - 1);
 
-					setCategory(0);
 					setQuestionNumber(0);
 
 					return state;
@@ -226,6 +230,7 @@ export default function CreatePage() {
 			case 'deleteQuestion':
 				if (state[category].questions.length > 1) {
 					let questionDeleted = parseInt(questionNumber);
+
 					console.log(
 						'this is questionDeleted selection:',
 						questionDeleted
@@ -253,8 +258,9 @@ export default function CreatePage() {
 
 					state = deleting();
 					state = setNewIds();
-
-					setQuestionNumber(0);
+					setQuestionNumber(
+						parseInt(state[category].questions.length) - 1
+					);
 
 					return state;
 				} else {
@@ -297,8 +303,15 @@ export default function CreatePage() {
 		setDownloadLink(window.URL.createObjectURL(data));
 	};
 	useEffect(() => {
-		generateFile();
-	}, [state]);
+		if (state.length - 1 === category) {
+			setCategory(parseInt(state.length) - 1);
+		}
+		if (state[category].questions.length === questionNumber) {
+			setQuestionNumber(parseInt(state[category].questions.length) - 1);
+		}
+	}, [category, questionNumber]);
+
+	console.log('this category before rendering: ', category);
 
 	console.log(state);
 	return (
