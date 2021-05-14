@@ -305,16 +305,17 @@ export default function CreatePage() {
 			let newStructure =
 				el.categoryName +
 				'\n' +
-				el.questions.forEach(function (sub, i2) {
+				el.questions.map(function (sub, i2) {
 					return (
 						i2 +
 						1 +
 						'' +
 						sub.question +
 						'Answer ' +
-						sub.options.forEach(function (option, i3) {
-							return i3 + '' + option;
+						sub.options.map(function (option, i3) {
+							return '\n' + i3 + 1 + '' + option;
 						}) +
+						'\n' +
 						sub.answer
 					);
 				}) +
