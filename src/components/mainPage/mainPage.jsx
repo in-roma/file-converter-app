@@ -300,24 +300,26 @@ export default function CreatePage() {
 	// Generate file
 	const [downloadLink, setDownloadLink] = useState('');
 	let generateFile = () => {
-		let formatingData = state.forEach(function (el, i1) {
-			let newStructure = el.categoryName + '\n';
-			// +
-			// el.questions.forEach(function (sub, i2) {
-			// 	return (
-			// 		i2 +
-			// 		1 +
-			// 		'' +
-			// 		sub.question +
-			// 		'Answer ' +
-			// 		sub.options.forEach(function (option, i3) {
-			// 			return i3 + '' + option;
-			// 		}) +
-			// 		sub.answer
-			// 	);
-			// });
-
-			return newStructure;
+		let formatingData = [];
+		state.forEach(function (el) {
+			let newStructure =
+				el.categoryName +
+				'\n' +
+				el.questions.forEach(function (sub, i2) {
+					return (
+						i2 +
+						1 +
+						'' +
+						sub.question +
+						'Answer ' +
+						sub.options.forEach(function (option, i3) {
+							return i3 + '' + option;
+						}) +
+						sub.answer
+					);
+				}) +
+				'\n';
+			formatingData.push(newStructure);
 		});
 		console.log('this formatted data', formatingData);
 		let data = new Blob([formatingData], {
