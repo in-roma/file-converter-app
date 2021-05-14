@@ -103,6 +103,7 @@ export default function CreatePage() {
 		switch (action.type) {
 			case 'addCategory':
 				if (state.length < 9) {
+					setRenameWindow(true);
 					setCategory(parseInt(state.length));
 					setQuestionNumber(0);
 

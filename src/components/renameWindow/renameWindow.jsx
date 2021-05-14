@@ -38,7 +38,7 @@ export default function RenameWindow({
 				</div>
 				<div className="category-window-buttons">
 					<div className="cancel-category-btn" onClick={closeWindow}>
-						<span>Cancel</span>
+						<span>Keep Number</span>
 					</div>
 					<div
 						className="rename-category-btn"
