@@ -1,61 +1,60 @@
 .confirmation-Window {
 	width: 40rem;
-	height: 4rem;
+	height: 6rem;
+	// Position
 	position: fixed;
 	top: 8rem;
 	left: 50%;
 	transform: translateX(-50%);
 	z-index: 5;
+	// Layout
 	background-color: rgb(255, 255, 255);
 	color: black;
 	box-shadow: 0 11px 15px rgba(0, 0, 0, 0.029),
 		0 88px 120px rgba(0, 0, 0, 0.08);
+	// Child elements
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 0.2rem 1.8rem;
 
-	.confirmation-Window-elements {
-		width: auto;
-		height: auto;
+	.confirmation-message {
+		font-size: 1.2rem;
+		justify-self: flex-start;
+		white-space: nowrap;
+	}
+	.confirmation-window-buttons {
+		width: 100%;
+		// Position
+		justify-self: flex-end;
+		// Child elements
 		display: flex;
-		flex-direction: column;
-		justify-content: center;
+		flex-wrap: row nowrap;
+		justify-content: flex-end;
 		align-items: center;
-		padding: 1.2rem 1.2rem;
 
-		.category-window-buttons {
-			position: relative;
-			display: flex;
-			flex-wrap: row nowrap;
-			align-self: flex-end;
-			justify-content: flex-end;
-			align-items: center;
-			justify-self: flex-end;
-			margin-top: 2.4rem;
-			.cancel-category-btn {
-				position: relative;
-				right: 0.4rem;
-				width: auto;
-				height: auto;
-				border-bottom: 1px black solid;
-
-				span {
-					font-size: 0.9rem;
-					font-weight: 400;
-					line-height: 0.2rem;
-				}
+		.cancel-category-btn {
+			width: auto;
+			height: auto;
+			margin-right: 1.2rem;
+			border-bottom: 1px black solid;
+			span {
+				font-size: 0.9rem;
+				font-weight: 400;
+				line-height: 0.2rem;
 			}
-
-			.confirmation-category-btn {
-				// position: absolute;
-				// right: 0;
-				border: 0.01rem black solid;
-				border-radius: 5%;
-				font-size: 1.2rem;
-				color: black;
-				padding: 0.4rem 1.4rem;
-				text-align: center;
-				&:hover {
-					color: white;
-					background-color: black;
-				}
+		}
+		.confirmation-category-btn {
+			border: 0.01rem black solid;
+			border-radius: 5%;
+			font-size: 1.2rem;
+			color: black;
+			padding: 0.4rem 1.4rem;
+			text-align: center;
+			&:hover {
+				color: white;
+				background-color: black;
 			}
 		}
 	}

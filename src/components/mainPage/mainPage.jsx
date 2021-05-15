@@ -71,12 +71,34 @@ export default function CreatePage() {
 		setConfirmationWindow(false);
 	};
 
-	let deleteElement = () => {};
+	let deleteElement = () => {
+		if (deleteType === 'quizz') {
+			setQuestionNumber(0);
+			setCategory(0);
+			setConfirmationWindow(false);
+			return dispatch({ type: 'resetQuizz' });
+		}
+		if (deleteType === 'category') {
+			setQuestionNumber(0);
+			setCategory(0);
+			setConfirmationWindow(false);
+			return dispatch({ type: 'deleteCategory' });
+		}
+	};
+	let deleteCategory = () => {
+		setConfirmationWindow(true);
+		setBtnLabel('Delete');
+		setConfirmationMessage(
+			`Are you sure to want to delete ${state[category].categoryName}?`
+		);
+		setDeleteType('category');
+	};
 
 	let resetQuizz = () => {
 		setConfirmationWindow(true);
 		setBtnLabel('Reset');
 		setConfirmationMessage(`Are you sure to want to reset the quizz?`);
+		setDeleteType('quizz');
 	};
 
 	// Display previous question
@@ -129,7 +151,7 @@ export default function CreatePage() {
 		switch (action.type) {
 			case 'addCategory':
 				if (state.length < 9) {
-					setRenameWindow(true);
+					// setRenameWindow(true);
 					setCategory(parseInt(state.length));
 					setQuestionNumber(0);
 
@@ -317,6 +339,10 @@ export default function CreatePage() {
 				} else {
 					return state;
 				}
+			case 'resetQuizz':
+				return produce(state, (draft) => {
+					return (draft = newQuizz);
+				});
 
 			default:
 				return state;
@@ -403,7 +429,7 @@ export default function CreatePage() {
 				questions={state[category].questions}
 				selectQuestion={selectQuestion}
 				renameCategory={openWindow}
-				deleteCategory={() => dispatch({ type: 'deleteCategory' })}
+				deleteCategory={deleteCategory}
 			></View>
 
 			{renameWindow && (
