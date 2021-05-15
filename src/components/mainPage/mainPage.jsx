@@ -26,12 +26,7 @@ let newQuizz = [
 			{
 				id: 0,
 				question: '',
-				options: [
-					['option1', 1, ''],
-					['option2', 2, ''],
-					['option3', 3, ''],
-					['option4', 4, ''],
-				],
+				options: ['', '', '', ''],
 				answer: 'A',
 			},
 		],
@@ -169,12 +164,7 @@ export default function CreatePage() {
 								{
 									id: 0,
 									question: '',
-									options: [
-										['option1', 1, ''],
-										['option2', 2, ''],
-										['option3', 3, ''],
-										['option4', 4, ''],
-									],
+									options: ['', '', '', ''],
 									answer: 'A',
 								},
 							],
@@ -241,8 +231,8 @@ export default function CreatePage() {
 					}
 					if (name === 'option') {
 						draft[category].questions[questionNumber].options[
-							parseInt(id.slice(-1) - 1)
-						][2] = value;
+							parseInt(id)
+						] = value;
 						draft[0].edited = true;
 					}
 					if (name === 'answer') {
@@ -258,15 +248,9 @@ export default function CreatePage() {
 					state[category].questions[questionNumber].options.length < 9
 				) {
 					let newOption = produce(state, (draft) => {
-						draft[category].questions[questionNumber].options.push([
-							`option${
-								state[category].questions[questionNumber]
-									.options.length + 1
-							}`,
-							state[category].questions[questionNumber].options
-								.length + 1,
-							'',
-						]);
+						draft[category].questions[questionNumber].options.push(
+							''
+						);
 						draft[0].edited = true;
 					});
 
@@ -275,6 +259,10 @@ export default function CreatePage() {
 					return state;
 				}
 			case 'deleteOption':
+				console.log(
+					'this delete action Payload',
+					parseInt(action.payload)
+				);
 				if (
 					state[category].questions[questionNumber].options.length > 2
 				) {
@@ -283,7 +271,9 @@ export default function CreatePage() {
 							questionNumber
 						].options = draft[category].questions[
 							questionNumber
-						].options.filter((el) => el[0] !== action.payload);
+						].options.filter(
+							(el, i) => i !== parseInt(action.payload)
+						);
 						draft[0].edited = true;
 					});
 
@@ -293,19 +283,14 @@ export default function CreatePage() {
 				}
 			case 'addQuestion':
 				console.log('add question before');
-				if (state[category].questions.length < 9) {
+				if (state[category].questions.length < 10) {
 					setQuestionNumber(state[category].questions.length);
 					console.log('questionNumber is now:', questionNumber);
 					let newQuestion = produce(state, (draft) => {
 						draft[category].questions.push({
 							id: parseInt(state[category].questions.length),
 							question: '',
-							options: [
-								['option1', 1, ''],
-								['option2', 2, ''],
-								['option3', 3, ''],
-								['option4', 4, ''],
-							],
+							options: ['', '', '', ''],
 							answer: 1,
 						});
 						draft[0].edited = true;
@@ -393,7 +378,7 @@ export default function CreatePage() {
 							return answerSuite.join();
 						}) +
 						el2.options.map(function (el4, i4, arr4) {
-							return lValues[i4] + ') ' + arr4[i4][2] + '\t';
+							return lValues[i4] + ') ' + arr4[i4] + '\t';
 						}) +
 						'Answer: ' +
 						el2.answer +
@@ -494,30 +479,28 @@ export default function CreatePage() {
 				value={state[category].questions[questionNumber].question}
 				id={state[category].questions[questionNumber].id}
 			/>
-			{state[category].questions[questionNumber].options.map((el) => (
-				<Option
-					id={el[0]}
-					key={el[0]}
-					optionNumber={el[1]}
-					value={el[2]}
-					onChange={(event) =>
-						dispatch({
-							type: 'handleChange',
-							payload: event.target,
-						})
-					}
-					deleteOption={(event) =>
-						dispatch({
-							type: 'deleteOption',
-							payload: event.currentTarget.parentNode.id,
-						})
-					}
-					lastitem={
-						state[category].questions[questionNumber].options
-							.length === el[1]
-					}
-				/>
-			))}
+			{state[category].questions[questionNumber].options.map(
+				(el, i, arr) => (
+					<Option
+						id={i}
+						key={`option${i}`}
+						value={el}
+						onChange={(event) =>
+							dispatch({
+								type: 'handleChange',
+								payload: event.target,
+							})
+						}
+						deleteOption={(event) =>
+							dispatch({
+								type: 'deleteOption',
+								payload: event.currentTarget.parentNode.id,
+							})
+						}
+						lastitem={i === arr.length - 1}
+					/>
+				)
+			)}
 			<Answer
 				listOptions={state[category].questions[questionNumber].options}
 				value={state[category].questions[questionNumber].answer}

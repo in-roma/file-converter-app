@@ -13,7 +13,7 @@ export default function Option({
 	let letteredValues = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
 	return (
 		<div className="option" id={id} lastitem={lastitem}>
-			<label>Option {letteredValues[optionNumber - 1]}:</label>
+			<label>Option {letteredValues[id]}:</label>
 			<input
 				type="text"
 				value={value}
