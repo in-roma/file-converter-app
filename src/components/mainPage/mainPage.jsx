@@ -19,6 +19,7 @@ import ConfirmationWindow from '../confirmationWindow/confirmationWindow';
 // Data initial state
 let newQuizz = [
 	{
+		edited: false,
 		id: 0,
 		categoryName: 'Category 1',
 		questions: [
@@ -71,20 +72,7 @@ export default function CreatePage() {
 		setConfirmationWindow(false);
 	};
 
-	let deleteElement = () => {
-		if (deleteType === 'quizz') {
-			setQuestionNumber(0);
-			setCategory(0);
-			setConfirmationWindow(false);
-			return dispatch({ type: 'resetQuizz' });
-		}
-		if (deleteType === 'category') {
-			setQuestionNumber(0);
-			setCategory(0);
-			setConfirmationWindow(false);
-			return dispatch({ type: 'deleteCategory' });
-		}
-	};
+	// Delete category or reset quizz
 	let deleteCategory = () => {
 		setConfirmationWindow(true);
 		setBtnLabel('Delete');
@@ -99,6 +87,21 @@ export default function CreatePage() {
 		setBtnLabel('Reset');
 		setConfirmationMessage(`Are you sure to want to reset the quizz?`);
 		setDeleteType('quizz');
+	};
+
+	let deleteElement = () => {
+		if (deleteType === 'quizz') {
+			setQuestionNumber(0);
+			setCategory(0);
+			setConfirmationWindow(false);
+			return dispatch({ type: 'resetQuizz' });
+		}
+		if (deleteType === 'category') {
+			setQuestionNumber(0);
+			setCategory(0);
+			setConfirmationWindow(false);
+			return dispatch({ type: 'deleteCategory' });
+		}
 	};
 
 	// Display previous question
@@ -138,11 +141,12 @@ export default function CreatePage() {
 	// Data state actions
 	// Dispatching actions
 
-	// Quizz local staorage
-	let quizzSaved = localStorage.getItem('Quizz Isadora') === 'true';
-	let initialState = quizzSaved
-		? localStorage.getItem('Quizz Isadora')
-		: newQuizz;
+	// Quizz state & local storage
+	let quizzSaved = JSON.parse(localStorage.getItem('Quizz Isadora'));
+	let initialState =
+		quizzSaved[0].edited === true
+			? JSON.parse(localStorage.getItem('Quizz Isadora'))
+			: newQuizz;
 
 	const [state, dispatch] = useReducer(optionReducer, initialState);
 
@@ -175,6 +179,7 @@ export default function CreatePage() {
 								},
 							],
 						});
+						draft[0].edited = true;
 					});
 
 					return newCategory;
@@ -184,6 +189,7 @@ export default function CreatePage() {
 			case 'renameCategory':
 				return produce(state, (draft) => {
 					draft[category].categoryName = renameValue;
+					draft[0].edited = true;
 					setRenameWindow(false);
 					setRenameValue('');
 				});
@@ -195,6 +201,7 @@ export default function CreatePage() {
 
 					let deleting = () => {
 						return produce(state, (draft) => {
+							draft[0].edited = true;
 							return draft.filter(function (el) {
 								return el.id !== categoryDeleted;
 							});
@@ -203,6 +210,7 @@ export default function CreatePage() {
 
 					let setNewIds = () => {
 						return produce(state, (draft) => {
+							draft[0].edited = true;
 							return draft.forEach(function (el, i) {
 								el.id = i;
 							});
@@ -212,7 +220,6 @@ export default function CreatePage() {
 					state = deleting();
 					state = setNewIds();
 					setCategory(parseInt(state.length) - 1);
-
 					setQuestionNumber(0);
 
 					return state;
@@ -230,16 +237,19 @@ export default function CreatePage() {
 						draft[category].questions[
 							questionNumber
 						].question = value;
+						draft[0].edited = true;
 					}
 					if (name === 'option') {
 						draft[category].questions[questionNumber].options[
 							parseInt(id.slice(-1) - 1)
 						][2] = value;
+						draft[0].edited = true;
 					}
 					if (name === 'answer') {
 						draft[category].questions[
 							questionNumber
 						].answer = value;
+						draft[0].edited = true;
 					}
 				});
 			case 'addOption':
@@ -257,7 +267,9 @@ export default function CreatePage() {
 								.length + 1,
 							'',
 						]);
+						draft[0].edited = true;
 					});
+
 					return newOption;
 				} else {
 					return state;
@@ -272,7 +284,9 @@ export default function CreatePage() {
 						].options = draft[category].questions[
 							questionNumber
 						].options.filter((el) => el[0] !== action.payload);
+						draft[0].edited = true;
 					});
+
 					return deleteOptions;
 				} else {
 					return state;
@@ -294,8 +308,10 @@ export default function CreatePage() {
 							],
 							answer: 1,
 						});
+						draft[0].edited = true;
 					});
 					console.log('add question after');
+
 					return newQuestion;
 				} else {
 					return state;
@@ -315,11 +331,13 @@ export default function CreatePage() {
 							].questions.filter(function (el, i) {
 								return el.id !== questionDeleted;
 							});
+							draft[0].edited = true;
 						});
 					};
 
 					let setNewIds = () => {
 						return produce(state, (draft) => {
+							draft[0].edited = true;
 							return draft[category].questions.forEach(function (
 								el,
 								i
@@ -397,8 +415,8 @@ export default function CreatePage() {
 		}
 	}, [category, questionNumber]);
 
-	// Saving quizz locally
-	localStorage.setItem('Quizz Isadora', state);
+	// Saving quizz to local storage
+	localStorage.setItem('Quizz Isadora', JSON.stringify(state));
 
 	console.log('this category before rendering: ', category);
 	console.log(state);
