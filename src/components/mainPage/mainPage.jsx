@@ -14,9 +14,10 @@ import Answer from '../answer/answer';
 import ControlQuestions from '../controlQuestions/controlQuestions';
 import ControlCreate from '../controlCreate/controlCreate';
 import RenameWindow from '../renameWindow/renameWindow';
+import ConfirmationWindow from '../confirmationWindow/confirmationWindow';
 
 // Data initial state
-let initialState = [
+let newQuizz = [
 	{
 		id: 0,
 		categoryName: 'Category 1',
@@ -36,6 +37,8 @@ let initialState = [
 	},
 ];
 
+let lValues = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
+
 export default function CreatePage() {
 	// Category displayed
 	const [category, setCategory] = useState(0);
@@ -51,13 +54,29 @@ export default function CreatePage() {
 	let closeWindow = () => {
 		setRenameWindow(false);
 	};
-
 	const [renameValue, setRenameValue] = useState('');
 
 	let renamingCategory = (event) => {
 		let renamingValue = event.target.value;
 		console.log(renamingValue);
 		setRenameValue(renamingValue);
+	};
+	// Confirmation window
+	const [confirmationWindow, setConfirmationWindow] = useState(false);
+	const [confirmationMessage, setConfirmationMessage] = useState('');
+	const [btnLabel, setBtnLabel] = useState('');
+	const [deleteType, setDeleteType] = useState('');
+
+	let closeConfirmationWindow = () => {
+		setConfirmationWindow(false);
+	};
+
+	let deleteElement = () => {};
+
+	let resetQuizz = () => {
+		setConfirmationWindow(true);
+		setBtnLabel('Reset');
+		setConfirmationMessage(`Are you sure to want to reset the quizz?`);
 	};
 
 	// Display previous question
@@ -96,6 +115,13 @@ export default function CreatePage() {
 
 	// Data state actions
 	// Dispatching actions
+
+	// Quizz local staorage
+	let quizzSaved = localStorage.getItem('Quizz Isadora') === 'true';
+	let initialState = quizzSaved
+		? localStorage.getItem('Quizz Isadora')
+		: newQuizz;
+
 	const [state, dispatch] = useReducer(optionReducer, initialState);
 
 	function optionReducer(state, action) {
@@ -301,7 +327,7 @@ export default function CreatePage() {
 	const [downloadLink, setDownloadLink] = useState('');
 	let generateFile = () => {
 		let formatingData = [];
-		state.forEach(function (el) {
+		state.map(function (el) {
 			let newStructure =
 				el.categoryName +
 				'\n' +
@@ -309,14 +335,19 @@ export default function CreatePage() {
 					return (
 						i2 +
 						1 +
-						'' +
+						'. ' +
 						sub.question +
 						'Answer ' +
-						sub.options.map(function (option, i3) {
-							return '\n' + i3 + 1 + '' + option;
+						sub.options.map(function (i3) {
+							return lValues[i3] + ', ';
 						}) +
-						'\n' +
-						sub.answer
+						sub.options.map(function (el, i4) {
+							return lValues[i4] + ')  ' + el[2] + '	';
+						}) +
+						'Answer: ' +
+						sub.answer +
+						') ' +
+						sub.options[lValues.indexOf(sub.answer)][2]
 					);
 				}) +
 				'\n';
@@ -340,8 +371,10 @@ export default function CreatePage() {
 		}
 	}, [category, questionNumber]);
 
-	console.log('this category before rendering: ', category);
+	// Saving quizz locally
+	localStorage.setItem('Quizz Isadora', state);
 
+	console.log('this category before rendering: ', category);
 	console.log(state);
 	return (
 		<form className="create-page">
@@ -381,6 +414,14 @@ export default function CreatePage() {
 					onChange={renamingCategory}
 					closeWindow={closeWindow}
 					renameCategory={() => dispatch({ type: 'renameCategory' })}
+				/>
+			)}
+			{confirmationWindow && (
+				<ConfirmationWindow
+					message={confirmationMessage}
+					deleteElement={deleteElement}
+					closeWindow={closeConfirmationWindow}
+					btnLabel={btnLabel}
 				/>
 			)}
 
@@ -444,6 +485,7 @@ export default function CreatePage() {
 				totalCategory={state.length}
 				generateFile={generateFile}
 				href={downloadLink}
+				resetQuizz={resetQuizz}
 			/>
 		</form>
 	);
