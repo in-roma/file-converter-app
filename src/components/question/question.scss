@@ -13,11 +13,12 @@
 		margin-right: 0.8rem;
 	}
 	input {
-		width: 100%;
+		width: 80%;
 		font-size: 1.6rem;
 		//Styling
 		border: none;
 		outline: none;
+		overflow: scroll;
 		// transform: translateY(0.1srem);
 	}
 }
