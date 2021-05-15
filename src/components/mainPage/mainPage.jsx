@@ -39,7 +39,7 @@ let newQuizz = [
 ];
 
 let lValues = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
-
+let convertedData;
 export default function CreatePage() {
 	// Category displayed
 	const [category, setCategory] = useState(0);
@@ -371,34 +371,43 @@ export default function CreatePage() {
 	const [downloadLink, setDownloadLink] = useState('');
 	let generateFile = () => {
 		let formatingData = [];
-		state.map(function (el) {
+		state.forEach(function (el) {
 			let newStructure =
 				el.categoryName +
 				'\n' +
-				el.questions.map(function (sub, i2) {
+				el.questions.map(function (el2, i2) {
 					return (
 						i2 +
 						1 +
 						'. ' +
-						sub.question +
-						'Answer ' +
-						sub.options.map(function (i3) {
-							return lValues[i3] + ', ';
+						el2.question +
+						'Answer' +
+						el2.options.map(function (el3, i3, arr) {
+							let answerSuite = [];
+							if (i3 < arr.length - 1) {
+								answerSuite.push(` ${lValues[i3]}`);
+							}
+							if (i3 === arr.length - 1) {
+								answerSuite.push(` or ${lValues[i3]}\t`);
+							}
+							return answerSuite.join();
 						}) +
-						sub.options.map(function (el, i4) {
-							return lValues[i4] + ')  ' + el[2] + '	';
+						el2.options.map(function (el4, i4, arr4) {
+							return lValues[i4] + ') ' + arr4[i4][2] + '\t';
 						}) +
 						'Answer: ' +
-						sub.answer +
+						el2.answer +
 						') ' +
-						sub.options[lValues.indexOf(sub.answer)][2]
+						el2.options[lValues.indexOf(el2.answer)] +
+						'\n'
 					);
 				}) +
 				'\n';
-			formatingData.push(newStructure);
+			formatingData.push(newStructure.replace(/(\t)(,)/g, '$1'));
+			convertedData = formatingData.join().replace(/(\n)(,)/gm, '$1');
 		});
 		console.log('this formatted data', formatingData);
-		let data = new Blob([formatingData], {
+		let data = new Blob([convertedData], {
 			type: 'text/plain;charset=utf-8',
 		});
 		if (downloadLink !== '') {
