@@ -3,7 +3,6 @@ import './option.scss';
 import { ReactComponent as IconDelete } from '../../assets/icons/delete-button-icon.svg';
 
 export default function Option({
-	optionNumber,
 	value,
 	deleteOption,
 	id,

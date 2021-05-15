@@ -68,6 +68,14 @@ export default function CreatePage() {
 	};
 
 	// Delete category or reset quizz
+
+	let resetQuizz = () => {
+		setConfirmationWindow(true);
+		setBtnLabel('Reset');
+		setConfirmationMessage(`Are you sure to want to reset the quizz?`);
+		setDeleteType('quizz');
+	};
+
 	let deleteCategory = () => {
 		setConfirmationWindow(true);
 		setBtnLabel('Delete');
@@ -77,25 +85,49 @@ export default function CreatePage() {
 		setDeleteType('category');
 	};
 
-	let resetQuizz = () => {
+	let deleteQuestion = () => {
 		setConfirmationWindow(true);
-		setBtnLabel('Reset');
-		setConfirmationMessage(`Are you sure to want to reset the quizz?`);
-		setDeleteType('quizz');
+		setBtnLabel('Delete');
+		setConfirmationMessage(
+			`Are you sure to want to delete question ${questionNumber + 1}?`
+		);
+		setDeleteType('question');
 	};
 
 	let deleteElement = () => {
 		if (deleteType === 'quizz') {
-			setQuestionNumber(0);
-			setCategory(0);
 			setConfirmationWindow(false);
+			setCategory(0);
+			setQuestionNumber(0);
 			return dispatch({ type: 'resetQuizz' });
 		}
 		if (deleteType === 'category') {
-			setQuestionNumber(0);
-			setCategory(0);
+			let categoryToDelete = category;
 			setConfirmationWindow(false);
-			return dispatch({ type: 'deleteCategory' });
+			setQuestionNumber(0);
+			if (categoryToDelete > 1) {
+				setCategory(categoryToDelete - 1);
+			} else {
+				setCategory(0);
+			}
+			return dispatch({
+				type: 'deleteCategory',
+				payload: categoryToDelete,
+			});
+		}
+		if (deleteType === 'question') {
+			let questionToDelete = questionNumber;
+			setConfirmationWindow(false);
+			setQuestionNumber(0);
+			if (questionToDelete > 1) {
+				setQuestionNumber(questionToDelete - 1);
+			} else {
+				setQuestionNumber(0);
+			}
+			return dispatch({
+				type: 'deleteQuestion',
+				payload: questionToDelete,
+			});
 		}
 	};
 
@@ -187,7 +219,7 @@ export default function CreatePage() {
 			case 'deleteCategory':
 				console.log('this category before deleting: ', category);
 				if (state.length > 1) {
-					let categoryDeleted = parseInt(category);
+					let categoryDeleted = action.payload;
 
 					let deleting = () => {
 						return produce(state, (draft) => {
@@ -209,8 +241,6 @@ export default function CreatePage() {
 
 					state = deleting();
 					state = setNewIds();
-					setCategory(parseInt(state.length) - 1);
-					setQuestionNumber(0);
 
 					return state;
 				} else {
@@ -303,7 +333,7 @@ export default function CreatePage() {
 				}
 			case 'deleteQuestion':
 				if (state[category].questions.length > 1) {
-					let questionDeleted = parseInt(questionNumber);
+					let questionDeleted = action.payload;
 
 					console.log(
 						'this is questionDeleted selection:',
@@ -401,11 +431,11 @@ export default function CreatePage() {
 		setDownloadLink(window.URL.createObjectURL(data));
 	};
 	useEffect(() => {
-		if (state.length - 1 === category) {
-			setCategory(parseInt(state.length) - 1);
+		if (parseInt(state.length) === category) {
+			setCategory(0);
 		}
-		if (state[category].questions.length === questionNumber) {
-			setQuestionNumber(parseInt(state[category].questions.length) - 1);
+		if (parseInt(state[category].questions.length) === questionNumber) {
+			setQuestionNumber(0);
 		}
 	}, [category, questionNumber]);
 
@@ -470,12 +500,7 @@ export default function CreatePage() {
 						payload: event.target,
 					})
 				}
-				deleteQuestion={(event) =>
-					dispatch({
-						type: 'deleteQuestion',
-						payload: event.target,
-					})
-				}
+				deleteQuestion={deleteQuestion}
 				value={state[category].questions[questionNumber].question}
 				id={state[category].questions[questionNumber].id}
 			/>
