@@ -144,7 +144,7 @@ export default function CreatePage() {
 	// Quizz state & local storage
 	let quizzSaved = JSON.parse(localStorage.getItem('Quizz Isadora'));
 	let initialState =
-		quizzSaved[0].edited === true
+		quizzSaved && quizzSaved[0].edited === true
 			? JSON.parse(localStorage.getItem('Quizz Isadora'))
 			: newQuizz;
 
