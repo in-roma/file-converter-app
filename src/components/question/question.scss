@@ -20,5 +20,9 @@
 		outline: none;
 		overflow: scroll;
 		// transform: translateY(0.1srem);
+		background-color: var(--color-background-light);
+		&::placeholder {
+			color: var(--color-text-light);
+		}
 	}
 }

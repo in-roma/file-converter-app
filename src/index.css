@@ -1,7 +1,12 @@
 :root {
     --color-border-light: rgb(244, 244, 244);
-    --color-text-light: rgb(125, 127, 131);
-    --color-background-light:rgb( 246, 246, 246);
+
+    /* Text */
+    --color-text-light: rgb(207, 207, 207);
+
+    /* Background */
+    --color-background-light:rgb(236, 236, 236);
+
    }
 
 html {
@@ -9,8 +14,9 @@ html {
 }
 
 body {
-    font-family: 'Helvetica', Arial, Helvetica, sans-serif;
+    font-family: 'Nunito', Arial, Helvetica, sans-serif;
     line-height: 1.5;
+    background-color: var(--color-background-light);
 
 }
 

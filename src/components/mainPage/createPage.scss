@@ -3,8 +3,11 @@
 	width: 100%;
 	height: auto;
 	grid-column: 2/3;
+	grid-row: 2/3;
+	align-self: start;
+
 	justify-self: flex-start;
-	align-self: center;
+	// align-self: center;
 	// Styling elements
 	border-bottom: 1px var(--color-border-light) solid;
 
@@ -23,6 +26,21 @@
 	align-items: center;
 	border-bottom: 1px var(--color-border-light) solid;
 	overflow-x: hidden;
+	@media screen and (max-width: 800px) {
+		height: 10rem;
+	}
+	@media screen and (max-width: 500px) {
+		height: 12rem;
+	}
+}
+
+.categories-list {
+	width: 80%;
+	height: 6rem;
+	display: flex;
+	flex-direction: row;
+	flex-flow: row wrap;
+	align-items: center;
 }
 
 .category {

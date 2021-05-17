@@ -447,15 +447,17 @@ export default function CreatePage() {
 	return (
 		<form className="create-page">
 			<div className="controlCategories-bar">
-				{state.map((el) => (
-					<Category
-						selectCategory={selectCategory}
-						id={el.id}
-						category={category}
-						categoryName={el.categoryName}
-						key={`category${el.id}`}
-					/>
-				))}
+				<div className="categories-list">
+					{state.map((el) => (
+						<Category
+							selectCategory={selectCategory}
+							id={el.id}
+							category={category}
+							categoryName={el.categoryName}
+							key={`category${el.id}`}
+						/>
+					))}
+				</div>
 				<Button
 					buttonName="Create Category"
 					onClick={() => dispatch({ type: 'addCategory' })}

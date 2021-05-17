@@ -17,6 +17,10 @@
 		border: none;
 		outline: none;
 		overflow: scroll;
+		background-color: var(--color-background-light);
+		&::placeholder {
+			color: var(--color-text-light);
+		}
 		// transform: translateY(0.2rem);
 	}
 }

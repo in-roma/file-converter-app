@@ -1,10 +1,10 @@
 .category-btn {
-	width: auto;
-	height: auto;
+	max-width: 18rem;
+	height: 1.6rem;
 	padding: 0.2rem 0.4rem;
-	margin: 0 0.4rem;
+	margin: 0.4rem 0.4rem;
 	border: 1px black solid;
-	border-radius: 5%;
+	border-radius: 08%;
 	span {
 		font-size: 1rem;
 	}
@@ -19,10 +19,10 @@
 }
 
 .category-btn-selected {
-	width: auto;
-	height: auto;
+	max-width: 18rem;
+	height: 1.6rem;
 	padding: 0.2rem 0.4rem;
-	margin: 0 0.4rem;
+	margin: 0.4rem 0.4rem;
 	border: 1px black solid;
 	border-radius: 5%;
 	color: white;
