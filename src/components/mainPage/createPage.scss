@@ -41,6 +41,12 @@
 	flex-direction: row;
 	flex-flow: row wrap;
 	align-items: center;
+	@media screen and (max-width: 800px) {
+		width: 70%;
+	}
+	@media screen and (max-width: 500px) {
+		width: 70%;
+	}
 }
 
 .category {

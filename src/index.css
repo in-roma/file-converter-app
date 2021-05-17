@@ -1,11 +1,11 @@
 :root {
-    --color-border-light: rgb(244, 244, 244);
+    --color-border-light: #9e9d9d10;
 
     /* Text */
     --color-text-light: rgb(207, 207, 207);
 
     /* Background */
-    --color-background-light:rgb(236, 236, 236);
+    --color-background-light:rgba(255, 255, 255, 0.151);
 
    }
 
@@ -16,7 +16,8 @@ html {
 body {
     font-family: 'Nunito', Arial, Helvetica, sans-serif;
     line-height: 1.5;
-    background-color: var(--color-background-light);
-
+    /* background-color: var(--color-background-light); */
+    background: rgb(247,247,247);
+    background: radial-gradient(circle, rgba(247,247,247,1) 10%, rgba(245,245,245,1) 96%);
 }
 
