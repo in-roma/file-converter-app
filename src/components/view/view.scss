@@ -38,18 +38,19 @@
 }
 
 .question-btn {
-	width: auto;
-	height: auto;
-	padding: 0.2rem 0.4rem;
-	margin: 0 0.6rem;
-	border: 1px black solid;
+	max-width: 18rem;
+	height: 1.4rem;
+	padding: 0.6rem 1.4rem;
+	margin: 0.4rem 0.4rem;
+	// border: 1px black solid;
+
 	border-radius: 5%;
 	span {
 		font-size: 1.1rem;
 	}
 	&:hover {
 		color: white;
-		background-color: black;
+		background-color: #9620f7;
 	}
 	&:active {
 		color: white;
@@ -58,14 +59,14 @@
 }
 
 .question-btn-selected {
-	width: auto;
-	height: auto;
-	padding: 0.2rem 0.5rem;
-	margin: 0 0.8rem;
-	border: 1px black solid;
+	max-width: 18rem;
+	height: 1.4rem;
+	padding: 0.6rem 1.4rem;
+	margin: 0.4rem 0.4rem;
+	// border: 1px black solid;
 	border-radius: 5%;
 	color: white;
-	background-color: black;
+	background-color: #9620f7;
 }
 
 .rename-category-btn {

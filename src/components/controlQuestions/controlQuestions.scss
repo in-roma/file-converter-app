@@ -7,6 +7,7 @@
 	justify-content: space-between;
 	align-items: center;
 	border-top: 1px var(--color-border-light) solid;
+	// background-color: white;
 }
 
 .add-question-field {
@@ -22,6 +23,9 @@
 	.addQuestion-addIcon {
 		width: 1.8rem;
 		margin-top: 0.8rem;
+		box-shadow: 0 6.7px 16.4px -59px rgba(0, 0, 0, 0.028),
+			0 22.3px 55.2px -59px rgba(0, 0, 0, 0.042),
+			0 100px 247px -59px rgba(0, 0, 0, 0.07);
 	}
 	span {
 		font-size: 1rem;
