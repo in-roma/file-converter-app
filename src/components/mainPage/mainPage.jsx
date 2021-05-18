@@ -5,6 +5,7 @@ import produce from 'immer';
 import './createPage.scss';
 
 // Components
+import TextIntro from '../textIntro/textIntro';
 import Category from '../category/category';
 import Button from '../button/button';
 import View from '../view/view';
@@ -446,6 +447,7 @@ export default function CreatePage() {
 	console.log(state);
 	return (
 		<form className="create-page">
+			<TextIntro />
 			<div className="controlCategories-bar">
 				<div className="categories-list">
 					{state.map((el) => (
