@@ -2,7 +2,7 @@ import React, { useReducer, useState, useEffect } from 'react';
 import produce from 'immer';
 
 // Stylesheet
-import './createPage.scss';
+import './mainPage.scss';
 
 // Components
 import TextIntro from '../textIntro/textIntro';
@@ -36,10 +36,24 @@ let newQuizz = [
 
 let lValues = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
 let convertedData;
+
 export default function CreatePage() {
+	// Display textIntro
+	const [textDisplay, setTextDisplay] = useState(false);
+	const [textBtnLabel, setTextBtnLabel] = useState('More Info');
+
+	let showHideText = () => {
+		if (textDisplay === true) {
+			setTextDisplay(false);
+			setTextBtnLabel('More info');
+		} else {
+			setTextDisplay(true);
+			setTextBtnLabel('Close');
+		}
+	};
+
 	// Category displayed
 	const [category, setCategory] = useState(0);
-
 	// Question displayed
 	const [questionNumber, setQuestionNumber] = useState(0);
 
@@ -69,7 +83,6 @@ export default function CreatePage() {
 	};
 
 	// Delete category or reset quizz
-
 	let resetQuizz = () => {
 		setConfirmationWindow(true);
 		setBtnLabel('Reset');
@@ -447,7 +460,15 @@ export default function CreatePage() {
 	console.log(state);
 	return (
 		<form className="create-page">
-			<TextIntro />
+			{textDisplay && <TextIntro />}
+			<div
+				className={
+					textDisplay ? 'textIntro-close-btn' : 'textIntro-more-btn'
+				}
+				onClick={showHideText}
+			>
+				<span>{textBtnLabel}</span>
+			</div>
 			<div className="controlCategories-bar">
 				<div className="categories-list">
 					{state.map((el) => (

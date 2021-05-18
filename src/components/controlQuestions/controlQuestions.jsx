@@ -9,13 +9,13 @@ import { ReactComponent as IconArrowRight } from '../../assets/icons/arrow-rigth
 export default function controlQuestions({ addOption, goLeft, goRight }) {
 	return (
 		<div className="controlFlow">
-			<IconArrowLeft onClick={goLeft} />
+			<IconArrowLeft className="question-icon" onClick={goLeft} />
 
 			<div className="add-question-field" onClick={addOption}>
-				<IconAdd className="addQuestion-addIcon" />
+				<IconAdd className="addQuestion-addIcon question-icon" />
 				<span>Add option</span>
 			</div>
-			<IconArrowRight onClick={goRight} />
+			<IconArrowRight className="question-icon" onClick={goRight} />
 		</div>
 	);
 }

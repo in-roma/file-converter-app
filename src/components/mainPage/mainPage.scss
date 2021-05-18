@@ -16,6 +16,24 @@
 	flex-flow: column;
 }
 
+.textIntro-close-btn {
+	align-self: center;
+	margin: 0.8rem;
+	span {
+		font-size: 1rem;
+		color: black;
+	}
+}
+
+.textIntro-more-btn {
+	align-self: center;
+	margin: 0.8rem;
+	span {
+		font-size: 1rem;
+		color: black;
+	}
+}
+
 .controlCategories-bar {
 	position: relative;
 	width: 100%;
