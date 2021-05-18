@@ -3,8 +3,8 @@ import './controlQuestions.scss';
 
 // icons
 import { ReactComponent as IconAdd } from '../../assets/icons/add-icon.svg';
-import { ReactComponent as IconArrowLeft } from '../../assets/icons/arrow-left-icon.svg';
-import { ReactComponent as IconArrowRight } from '../../assets/icons/arrow-rigth-icon.svg';
+import { ReactComponent as IconArrowLeft } from '../../assets/icons/arrow-left-icon2.svg';
+import { ReactComponent as IconArrowRight } from '../../assets/icons/arrow-rigth-icon2.svg';
 
 export default function controlQuestions({ addOption, goLeft, goRight }) {
 	return (

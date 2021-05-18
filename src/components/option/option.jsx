@@ -1,6 +1,6 @@
 import React from 'react';
 import './option.scss';
-import { ReactComponent as IconDelete } from '../../assets/icons/delete-button-icon.svg';
+import { ReactComponent as IconDelete } from '../../assets/icons/delete-button-icon2.svg';
 
 export default function Option({
 	value,

@@ -57,10 +57,13 @@
 }
 
 .reset-category-btn {
+	position: absolute;
+	right: 10rem;
 	width: auto;
 	height: auto;
 	border-bottom: 1px black solid;
 	margin-right: 1.6rem;
+	cursor: pointer;
 	span {
 		font-size: 0.9rem;
 		font-weight: 400;
@@ -68,16 +71,21 @@
 	}
 }
 .generate-file-btn {
-	width: auto;
-	border: 0.01rem black solid;
+	max-width: 18rem;
+	height: 1.4rem;
+	padding: 0.6rem 1.4rem;
+	margin: 0.4rem 0rem;
 	border-radius: 5%;
-	font-size: 1.2rem;
+	border: 0.01rem black solid;
 	color: black;
-	padding: 0.4rem 1.4rem;
+	font-size: 1.1rem;
 	text-align: center;
 	text-decoration: none;
+	cursor: pointer;
 	&:hover {
-		color: white;
-		background-color: black;
+		color: black;
+		background-color: #ebf745;
+		border: 0.01rem #ebf745 solid;
+		border: none;
 	}
 }

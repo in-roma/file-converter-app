@@ -48,7 +48,7 @@ export default function CreatePage() {
 			setTextBtnLabel('More info');
 		} else {
 			setTextDisplay(true);
-			setTextBtnLabel('Close');
+			setTextBtnLabel('Close info');
 		}
 	};
 
@@ -461,13 +461,17 @@ export default function CreatePage() {
 	return (
 		<form className="create-page">
 			{textDisplay && <TextIntro />}
-			<div
-				className={
-					textDisplay ? 'textIntro-close-btn' : 'textIntro-more-btn'
-				}
-				onClick={showHideText}
-			>
-				<span>{textBtnLabel}</span>
+			<div className="header-sub">
+				<div
+					className={
+						textDisplay
+							? 'textIntro-close-btn'
+							: 'textIntro-more-btn'
+					}
+					onClick={showHideText}
+				>
+					<span>{textBtnLabel}</span>
+				</div>
 			</div>
 			<div className="controlCategories-bar">
 				<div className="categories-list">

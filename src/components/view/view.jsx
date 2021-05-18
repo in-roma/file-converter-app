@@ -33,20 +33,22 @@ export default function View({
 			</div>
 
 			<div className="view-questions">
-				{questions.map((el) => (
-					<div
-						className={
-							questionNumber === el.id
-								? 'question-btn-selected'
-								: 'question-btn'
-						}
-						id={parseInt(el.id + 1)}
-						key={`questionBtn${el.id + 1}`}
-						onClick={selectQuestion}
-					>
-						<span>Question {el.id + 1}</span>
-					</div>
-				))}
+				<div className="list-questions">
+					{questions.map((el) => (
+						<div
+							className={
+								questionNumber === el.id
+									? 'question-btn-selected'
+									: 'question-btn'
+							}
+							id={parseInt(el.id + 1)}
+							key={`questionBtn${el.id + 1}`}
+							onClick={selectQuestion}
+						>
+							<span>Question {el.id + 1}</span>
+						</div>
+					))}
+				</div>
 
 				<Button buttonName="New Question" onClick={newQuestion} />
 			</div>
