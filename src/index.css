@@ -1,8 +1,15 @@
 :root {
-    --color-border-light: #9e9d9d10;
 
     /* Text */
-    --color-text-light: rgb(187, 187, 187);
+    --color-text-light: rgb(165, 165, 165);
+    --color-text-dark: rgb(39, 39, 43);
+
+    /* Borders */
+    --color-border-light: #9e9d9d10;
+    
+    /* Patterns */
+    --color-patterns: rgb(39, 39, 43);
+
 
     /* Background */
     --color-background-light:rgba(255, 255, 255, 0.151);
