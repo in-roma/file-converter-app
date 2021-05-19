@@ -19,16 +19,16 @@
 		flex-direction: row nowrap;
 		justify-content: flex-start;
 		align-items: center;
-		@media screen and (max-width: 700px) {
+		@media screen and (max-width: 500px) {
 			svg:nth-child(-n + 1) {
 				display: none;
 			}
 		}
-		@media screen and (max-width: 600px) {
-			svg:nth-child(-n + 2) {
-				display: none;
-			}
-		}
+		// @media screen and (max-width: 400px) {
+		// 	svg:nth-child(-n + 2) {
+		// 		display: none;
+		// 	}
+		// }
 	}
 	.header-icons-end {
 		width: auto;
@@ -36,16 +36,16 @@
 		flex-direction: row nowrap;
 		justify-content: flex-end;
 		align-items: center;
-		@media screen and (max-width: 700px) {
+		@media screen and (max-width: 500px) {
 			svg:nth-child(-n + 1) {
 				display: none;
 			}
 		}
-		@media screen and (max-width: 600px) {
-			svg:nth-child(-n + 2) {
-				display: none;
-			}
-		}
+		// @media screen and (max-width: 400px) {
+		// 	svg:nth-child(-n + 2) {
+		// 		display: none;
+		// 	}
+		// }
 	}
 	.header-icon-left {
 		width: 4.2rem;
@@ -53,6 +53,11 @@
 		margin-right: 3rem;
 		color: var(--color-patterns);
 		@media screen and (max-width: 800px) {
+			width: 3.8rem;
+			height: 3.8rem;
+			margin-right: 2.4rem;
+		}
+		@media screen and (max-width: 700px) {
 			width: 3.4rem;
 			height: 3.4rem;
 			margin-right: 1.8rem;
@@ -60,7 +65,12 @@
 		@media screen and (max-width: 500px) {
 			width: 3.2rem;
 			height: 3.2rem;
-			margin-right: 1.4rem;
+			margin-right: 0.8rem;
+		}
+		@media screen and (max-width: 400px) {
+			width: 2.8rem;
+			height: 2.8rem;
+			margin-right: 0.2rem;
 		}
 	}
 	.header-icon-right {
@@ -69,14 +79,24 @@
 		margin-left: 3rem;
 		color: var(--color-patterns);
 		@media screen and (max-width: 800px) {
+			width: 3.8rem;
+			height: 3.8rem;
+			margin-left: 2.4rem;
+		}
+		@media screen and (max-width: 700px) {
 			width: 3.4rem;
 			height: 3.4rem;
 			margin-left: 1.8rem;
 		}
 		@media screen and (max-width: 500px) {
+			width: 3.2rem;
+			height: 3.2rem;
+			margin-left: 0.8rem;
+		}
+		@media screen and (max-width: 400px) {
 			width: 2.8rem;
 			height: 2.8rem;
-			margin-left: 1.4rem;
+			margin-left: 0.2rem;
 		}
 	}
 	.header-title {
@@ -84,7 +104,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		margin: 0 0.8rem;
+		margin: 0 0.4rem;
 	}
 
 	h1 {

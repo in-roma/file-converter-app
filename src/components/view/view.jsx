@@ -51,7 +51,6 @@ export default function View({
 						</div>
 					))}
 				</div>
-
 				<Button buttonName="New Question" onClick={newQuestion} />
 			</div>
 		</React.Fragment>

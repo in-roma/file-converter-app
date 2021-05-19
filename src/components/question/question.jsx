@@ -15,7 +15,7 @@ export default function Question({ value, onChange, deleteQuestion, id }) {
 					id={id}
 				></input>
 			</div>
-			<div className="delete-category-btn" onClick={deleteQuestion}>
+			<div className="delete-question-btn" onClick={deleteQuestion}>
 				<span id={id}>Delete question</span>
 			</div>
 		</div>

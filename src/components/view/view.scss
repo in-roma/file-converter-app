@@ -35,7 +35,7 @@
 	@media screen and (max-width: 500px) {
 		font-size: 1.4rem;
 		font-weight: 600;
-		width: 80%;
+		width: 100%;
 		text-align: center;
 	}
 }
@@ -50,22 +50,29 @@
 	border-bottom: 1px var(--color-border-light) solid;
 
 	// background-color: var(--color-background-light);
-	@media screen and (max-width: 900px) {
+
+	@media screen and (max-width: 700px) {
 		height: 12rem;
 	}
-	@media screen and (max-width: 700px) {
+	@media screen and (max-width: 500px) {
 		height: 14rem;
 	}
 }
 
 .list-questions {
-	width: 75%;
-	height: auto;
+	width: 80%;
+	height: 80%;
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
 	justify-content: flex-start;
-	overflow: scroll;
+	overflow: auto;
+	@media screen and (max-width: 700px) {
+		width: 75%;
+	}
+	@media screen and (max-width: 400px) {
+		width: 68%;
+	}
 }
 
 .question-btn {
