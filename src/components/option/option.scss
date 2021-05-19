@@ -16,6 +16,9 @@
 		font-size: 1.6rem;
 		margin-right: 0.2rem;
 		margin-left: 1.4rem;
+		@media screen and (max-width: 500px) {
+			font-size: 1.4rem;
+		}
 	}
 	input {
 		width: 100%;
@@ -29,5 +32,8 @@
 			color: var(--color-text-light);
 		}
 		// transform: translateY(0.2rem);
+		@media screen and (max-width: 500px) {
+			font-size: 1.4rem;
+		}
 	}
 }

@@ -21,7 +21,7 @@ function Header() {
 				<Experiment className="header-icon-left" />
 				<Astronomy className="header-icon-left" />
 				<Key className="header-icon-left" />
-				<Music className="header-icon-left" />
+				{/* <Music className="header-icon-left" /> */}
 			</div>
 			<div className="header-title">
 				<h1>Trivia File Generator</h1>
@@ -29,7 +29,7 @@ function Header() {
 			</div>
 			<div className="header-icons-end">
 				<Man className="header-icon-right " />
-				<Paint className="header-icon-right " />
+				{/* <Paint className="header-icon-right " /> */}
 				<Swimmer className="header-icon-right " />
 				<Idea className="header-icon-right " />
 				<Lab className="header-icon-right " />

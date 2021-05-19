@@ -486,6 +486,7 @@ export default function CreatePage() {
 					))}
 				</div>
 				<Button
+					className="create-Category-btn"
 					buttonName="Create Category"
 					onClick={() => dispatch({ type: 'addCategory' })}
 				/>

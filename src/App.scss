@@ -27,16 +27,16 @@
 		grid-template-columns: auto 46rem auto;
 	}
 	@media screen and (max-width: 500px) {
-		grid-template-columns: auto 46rem auto;
+		grid-template-columns: auto 44rem auto;
 	}
 	@media screen and (max-width: 450px) {
-		grid-template-columns: auto 40rem auto;
-	}
-	@media screen and (max-width: 400px) {
 		grid-template-columns: auto 38rem auto;
 	}
+	@media screen and (max-width: 400px) {
+		grid-template-columns: auto 34rem auto;
+	}
 	@media screen and (max-width: 350px) {
-		grid-template-columns: auto 30rem auto;
+		grid-template-columns: auto 28rem auto;
 	}
 
 	// background-color: var(--color-background-light);

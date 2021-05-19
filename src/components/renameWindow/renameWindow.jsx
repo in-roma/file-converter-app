@@ -33,7 +33,7 @@ export default function RenameWindow({
 						name="newCategoryName"
 						autoComplete="off"
 						autoFocus="on"
-						maxLength="20"
+						maxLength="28"
 					></input>
 				</div>
 				<div className="category-window-buttons">

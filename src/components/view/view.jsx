@@ -18,7 +18,9 @@ export default function View({
 		<React.Fragment>
 			<div className="view-bar">
 				<div className="category-actions">
-					<span>{state[category].categoryName}</span>
+					<span id="category-actions-title">
+						{state[category].categoryName}
+					</span>
 					<div
 						className="rename-category-btn"
 						onClick={renameCategory}
