@@ -289,7 +289,7 @@ export default function CreatePage() {
 			case 'addOption':
 				console.log('add option before');
 				if (
-					state[category].questions[questionNumber].options.length < 9
+					state[category].questions[questionNumber].options.length < 4
 				) {
 					let newOption = produce(state, (draft) => {
 						draft[category].questions[questionNumber].options.push(
