@@ -8,11 +8,29 @@ export default function Answer({ listOptions, onChange, value }) {
 		<div className="answer">
 			<label>Answer:</label>
 			<select value={value} onChange={onChange} name="answer">
-				{listOptions.map((el, i) => (
-					<option value={letteredValues[i]} key={'options' + i}>
-						{letteredValues[i]}
-					</option>
-				))}
+				{listOptions.map((el, i) => {
+					if (i === 0) {
+						return (
+							<option
+								value={letteredValues[i]}
+								selected
+								key={'options' + i}
+							>
+								{letteredValues[i]}
+							</option>
+						);
+					}
+					if (i > 0) {
+						return (
+							<option
+								value={letteredValues[i]}
+								key={'options' + i}
+							>
+								{letteredValues[i]}
+							</option>
+						);
+					}
+				})}
 			</select>
 		</div>
 	);
