@@ -12,6 +12,13 @@
 		font-size: 2rem;
 		line-height: 1.8rem;
 	}
+	@media screen and (max-width: 450px) {
+		height: 7rem;
+		display: flex;
+		flex-flow: column;
+		justify-content: center;
+		align-items: center;
+	}
 }
 
 .category-actions {
@@ -132,7 +139,8 @@
 		font-weight: 400;
 		line-height: 0.2rem;
 	}
-	// span:hover {
-	// 	font-weight: 600;
-	// }
+	@media screen and (max-width: 450px) {
+		position: relative;
+		margin-top: 0.6rem;
+	}
 }
