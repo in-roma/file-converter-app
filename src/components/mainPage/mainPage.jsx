@@ -429,10 +429,10 @@ export default function CreatePage() {
 								return lValues[i4] + ') ' + arr4[i4] + '\t';
 							}
 							if (arr4.length === 2 && i4 >= 1) {
-								return `--\t--\t`;
+								return `\t--\t--\t`;
 							}
 							if (arr4.length === 3 && i4 >= 2) {
-								return `--\t`;
+								return `\t--\t`;
 							}
 						}) +
 						'Answer: ' +
