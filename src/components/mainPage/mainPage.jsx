@@ -86,7 +86,7 @@ export default function CreatePage() {
 	let resetQuizz = () => {
 		setConfirmationWindow(true);
 		setBtnLabel('Reset');
-		setConfirmationMessage(`Are you sure to want to reset the quizz?`);
+		setConfirmationMessage(`Are you sure to want to reset the trivia?`);
 		setDeleteType('quizz');
 	};
 
