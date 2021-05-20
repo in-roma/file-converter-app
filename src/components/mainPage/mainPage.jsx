@@ -424,7 +424,6 @@ export default function CreatePage() {
 
 							return answerSuite.join();
 						}) +
-						'\t' +
 						el2.options.map(function (el4, i4, arr4) {
 							let answerSuite2 = [];
 							if (i4 <= arr4.length - 1) {
