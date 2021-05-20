@@ -3,7 +3,7 @@ import React from 'react';
 import './renameWindow.scss';
 
 // Components
-import { ReactComponent as IconDelete } from '../../assets/icons/delete-button-icon.svg';
+import { ReactComponent as IconDelete } from '../../assets/icons/delete-button-icon2.svg';
 
 export default function RenameWindow({
 	categoryName,
@@ -33,12 +33,12 @@ export default function RenameWindow({
 						name="newCategoryName"
 						autoComplete="off"
 						autoFocus="on"
-						maxLength="28"
+						maxLength="34"
 					></input>
 				</div>
 				<div className="category-window-buttons">
 					<div className="cancel-category-btn" onClick={closeWindow}>
-						<span>Keep Number</span>
+						<span>Cancel</span>
 					</div>
 					<div
 						className="rename-category-btn"

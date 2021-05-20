@@ -10,16 +10,18 @@ export default function ConfirmationWindow({
 }) {
 	return (
 		<div className="confirmation-Window">
-			<span className="confirmation-message">{message}</span>
-			<div className="confirmation-window-buttons">
-				<div className="cancel-category-btn" onClick={closeWindow}>
-					<span>Cancel</span>
-				</div>
-				<div
-					className="confirmation-category-btn"
-					onClick={deleteElement}
-				>
-					{btnLabel}
+			<div className="confirmation-window-form">
+				<span className="confirmation-message">{message}</span>
+				<div className="confirmation-window-buttons">
+					<div className="cancel-category-btn" onClick={closeWindow}>
+						<span>Cancel</span>
+					</div>
+					<div
+						className="confirmation-category-btn"
+						onClick={deleteElement}
+					>
+						{btnLabel}
+					</div>
 				</div>
 			</div>
 		</div>

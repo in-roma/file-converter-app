@@ -19,7 +19,7 @@
 		flex-direction: row nowrap;
 		justify-content: flex-start;
 		align-items: center;
-		@media screen and (max-width: 500px) {
+		@media screen and (max-width: 600px) {
 			svg:nth-child(-n + 1) {
 				display: none;
 			}
@@ -36,7 +36,7 @@
 		flex-direction: row nowrap;
 		justify-content: flex-end;
 		align-items: center;
-		@media screen and (max-width: 500px) {
+		@media screen and (max-width: 600px) {
 			svg:nth-child(-n + 1) {
 				display: none;
 			}

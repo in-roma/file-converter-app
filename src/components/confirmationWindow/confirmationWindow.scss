@@ -1,32 +1,59 @@
 .confirmation-Window {
-	width: 40rem;
+	width: 42rem;
 	height: 6rem;
-	// Position
 	position: fixed;
-	top: 8rem;
+	top: 14rem;
 	left: 50%;
 	transform: translateX(-50%);
 	z-index: 5;
-	// Layout
 	background-color: rgb(255, 255, 255);
 	color: black;
-	box-shadow: 0 11px 15px rgba(0, 0, 0, 0.029),
-		0 88px 120px rgba(0, 0, 0, 0.08);
+	box-shadow: 0 2.8px 6.1px -24px rgba(0, 0, 0, 0.02),
+		0 6.7px 14.8px -24px rgba(0, 0, 0, 0.028),
+		0 12.5px 27.8px -24px rgba(0, 0, 0, 0.035),
+		0 22.3px 49.6px -24px rgba(0, 0, 0, 0.042),
+		0 41.8px 92.7px -24px rgba(0, 0, 0, 0.05),
+		0 100px 222px -24px rgba(0, 0, 0, 0.07);
+
+	border: 2px #14f76a solid;
+	opacity: 0.99;
 	// Child elements
 	display: flex;
 	flex-flow: row nowrap;
-	justify-content: flex-start;
+
 	align-items: center;
-	padding: 0.2rem 1.8rem;
+
+	@media screen and (max-width: 600px) {
+		width: 30rem;
+	}
+
+	.confirmation-window-form {
+		width: 100%;
+		height: auto;
+		font-size: 1.4rem;
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+		padding: 0.8rem 1.8rem;
+		@media screen and (max-width: 600px) {
+			padding: 0.8rem 0.8rem;
+		}
+	}
 
 	.confirmation-message {
-		font-size: 1.2rem;
+		width: auto;
+		height: auto;
+		align-self: center;
 		justify-self: flex-start;
-		white-space: nowrap;
+		white-space: wrap;
+		margin-right: 1.2rem;
+		@media screen and (max-width: 600px) {
+			font-size: 1.2rem;
+			padding: 0.8rem 1.4rem;
+		}
 	}
 	.confirmation-window-buttons {
-		width: 100%;
-		// Position
+		width: auto;
 		justify-self: flex-end;
 		// Child elements
 		display: flex;
@@ -46,15 +73,28 @@
 			}
 		}
 		.confirmation-category-btn {
-			border: 0.01rem black solid;
+			max-width: 18rem;
+			height: 1.4rem;
+			padding: 0.6rem 1.4rem;
+			margin: 0.4rem 0;
 			border-radius: 5%;
-			font-size: 1.2rem;
+			border: 0.01rem black solid;
+			font-size: 1.1rem;
 			color: black;
-			padding: 0.4rem 1.4rem;
 			text-align: center;
+			background-color: var(--color-background-light);
+			cursor: pointer;
 			&:hover {
-				color: white;
-				background-color: black;
+				color: black;
+				background-color: #ebf745;
+				border: 0.01rem #ebf745 solid;
+			}
+			@media screen and (max-width: 550px) {
+				max-width: 9rem;
+				height: 1.2rem;
+				padding: 0.6rem 0.8rem;
+				margin: 0.4rem 0rem;
+				font-size: 1rem;
 			}
 		}
 	}
