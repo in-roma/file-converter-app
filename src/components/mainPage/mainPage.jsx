@@ -422,10 +422,10 @@ export default function CreatePage() {
 								answerSuite.push(` or ${lValues[i3]}\t`);
 							}
 
-							if (arr.length === 2) {
+							if (arr.length === 2 && i > 1) {
 								answerSuite.push(`--\t--\t`);
 							}
-							if (arr.length === 3) {
+							if (arr.length === 3 && i > 2) {
 								answerSuite.push(`--\t`);
 							}
 
