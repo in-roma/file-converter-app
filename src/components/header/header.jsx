@@ -10,8 +10,8 @@ import { ReactComponent as Swimmer } from '../../assets/icons/swimmer.svg';
 import { ReactComponent as Astronomy } from '../../assets/icons/astronomy.svg';
 import { ReactComponent as Key } from '../../assets/icons/key.svg';
 import { ReactComponent as Idea } from '../../assets/icons/idea.svg';
-import { ReactComponent as Paint } from '../../assets/icons/paint.svg';
-import { ReactComponent as Music } from '../../assets/icons/music.svg';
+// import { ReactComponent as Paint } from '../../assets/icons/paint.svg';
+// import { ReactComponent as Music } from '../../assets/icons/music.svg';
 
 function Header() {
 	return (

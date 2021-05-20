@@ -9,12 +9,12 @@ export default function RenameWindow({
 	categoryName,
 	value,
 	onChange,
-	key,
+	keyWindow,
 	closeWindow,
 	renameCategory,
 }) {
 	return (
-		<div className="rename-Window" key={key}>
+		<div className="rename-Window" key={keyWindow}>
 			<form action="" className="rename-Window-form">
 				<div className="rename-window-header">
 					<h1> {categoryName}</h1>

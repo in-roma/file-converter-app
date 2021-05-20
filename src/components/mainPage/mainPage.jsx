@@ -521,7 +521,7 @@ export default function CreatePage() {
 
 			{renameWindow && (
 				<RenameWindow
-					key={state[category].categoryName + 'window'}
+					keyWindow={state[category].categoryName + 'window'}
 					categoryName={state[category].categoryName}
 					value={renameValue}
 					onChange={renamingCategory}
