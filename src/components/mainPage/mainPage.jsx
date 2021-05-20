@@ -414,17 +414,19 @@ export default function CreatePage() {
 						'Answer' +
 						el2.options.map(function (el3, i3, arr) {
 							let answerSuite = [];
-							if (i3 < arr.length - 1) {
-								answerSuite.push(` ${lValues[i3]}`);
-							}
-							if (i3 === arr.length - 1) {
-								answerSuite.push(` or ${lValues[i3]}\t`);
-							}
+
 							if (arr.length === 2) {
 								answerSuite.push(`--\t--\t`);
 							}
 							if (arr.length === 3) {
 								answerSuite.push(`--\t`);
+							}
+
+							if (i3 < arr.length - 1) {
+								answerSuite.push(` ${lValues[i3]}`);
+							}
+							if (i3 === arr.length - 1) {
+								answerSuite.push(` or ${lValues[i3]}\t`);
 							}
 
 							return answerSuite.join();
