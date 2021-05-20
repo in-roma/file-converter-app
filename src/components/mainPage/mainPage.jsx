@@ -428,10 +428,10 @@ export default function CreatePage() {
 							if (i4 <= arr4.length - 1) {
 								return lValues[i4] + ') ' + arr4[i4] + '\t';
 							}
-							if (arr4.length === 2 && i4 >= 1) {
+							if (arr4.length === 2 && i4 === 1) {
 								return `\t--\t--\t`;
 							}
-							if (arr4.length === 3 && i4 >= 2) {
+							if (arr4.length === 3 && i4 === 2) {
 								return `\t--\t`;
 							}
 						}) +
