@@ -424,6 +424,7 @@ export default function CreatePage() {
 						el2.options.map(function (el4, i4, arr4) {
 							return lValues[i4] + ') ' + arr4[i4] + '\t';
 						}) +
+						' ' +
 						'Answer: ' +
 						el2.answer +
 						') ' +
