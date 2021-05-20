@@ -422,17 +422,18 @@ export default function CreatePage() {
 								answerSuite.push(` or ${lValues[i3]}\t`);
 							}
 
-							if (arr.length === 2 && i3 >= 1) {
-								answerSuite.push(`--\t--\t`);
-							}
-							if (arr.length === 3 && i3 >= 2) {
-								answerSuite.push(`--\t`);
-							}
-
 							return answerSuite.join();
 						}) +
 						el2.options.map(function (el4, i4, arr4) {
-							return lValues[i4] + ') ' + arr4[i4] + '\t';
+							if (i4 < arr4.length - 1) {
+								return lValues[i4] + ') ' + arr4[i4] + '\t';
+							}
+							if (arr4.length === 2 && i4 >= 1) {
+								return `--\t--\t`;
+							}
+							if (arr4.length === 3 && i4 >= 2) {
+								return `--\t`;
+							}
 						}) +
 						'Answer: ' +
 						el2.answer +
