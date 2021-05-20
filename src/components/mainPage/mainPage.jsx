@@ -410,6 +410,7 @@ export default function CreatePage() {
 						1 +
 						'. ' +
 						el2.question +
+						' ' +
 						'Answer' +
 						el2.options.map(function (el3, i3, arr) {
 							let answerSuite = [];
@@ -419,12 +420,18 @@ export default function CreatePage() {
 							if (i3 === arr.length - 1) {
 								answerSuite.push(` or ${lValues[i3]}\t`);
 							}
+							if (arr.length === 2) {
+								answerSuite.push(`\t--\t--\t`);
+							}
+							if (arr.length === 3) {
+								answerSuite.push(`\t--\t`);
+							}
+
 							return answerSuite.join();
 						}) +
 						el2.options.map(function (el4, i4, arr4) {
 							return lValues[i4] + ') ' + arr4[i4] + '\t';
 						}) +
-						' ' +
 						'Answer: ' +
 						el2.answer +
 						') ' +
