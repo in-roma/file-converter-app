@@ -16,7 +16,7 @@ export default function ControlCreate({
 			</div>
 			<div className="creates-btns">
 				<div className="reset-category-btn" onClick={resetQuizz}>
-					<span>Reset Quizz</span>
+					<span>Reset Trivia</span>
 				</div>
 				<div className="createFile-control-button">
 					<a
