@@ -335,7 +335,7 @@ export default function CreatePage() {
 							id: parseInt(state[category].questions.length),
 							question: '',
 							options: ['', '', '', ''],
-							answer: 1,
+							answer: 'A',
 						});
 						draft[0].edited = true;
 					});
