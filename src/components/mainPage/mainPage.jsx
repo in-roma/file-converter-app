@@ -424,6 +424,7 @@ export default function CreatePage() {
 
 							return answerSuite.join();
 						}) +
+						'\t' +
 						el2.options.map(function (el4, i4, arr4) {
 							let answerSuite2 = [];
 							if (i4 <= arr4.length - 1) {
@@ -432,7 +433,7 @@ export default function CreatePage() {
 								);
 							}
 							if (arr4.length === 2 && i4 === 1) {
-								answerSuite2.push(`\t--\t--\t`);
+								answerSuite2.push(`--\t--\t`);
 							}
 							if (arr4.length === 3 && i4 === 2) {
 								answerSuite2.push(`\t--\t`);
