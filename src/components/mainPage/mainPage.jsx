@@ -421,10 +421,10 @@ export default function CreatePage() {
 								answerSuite.push(` or ${lValues[i3]}\t`);
 							}
 							if (arr.length === 2) {
-								answerSuite.push(`\t--\t--\t`);
+								answerSuite.push(`--\t--\t`);
 							}
 							if (arr.length === 3) {
-								answerSuite.push(`\t--\t`);
+								answerSuite.push(`--\t`);
 							}
 
 							return answerSuite.join();
