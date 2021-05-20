@@ -34,6 +34,7 @@ let newQuizz = [
 	},
 ];
 
+// Utilities
 let lValues = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
 let convertedData;
 

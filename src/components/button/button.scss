@@ -9,15 +9,15 @@
 	border: 0.01rem black solid;
 	font-size: 1.1rem;
 	color: black;
-
 	text-align: center;
 	background-color: var(--color-background-light);
 	cursor: pointer;
 	&:hover {
 		color: black;
-		background-color: #ebf745;
-		border: 0.01rem #ebf745 solid;
+		background-color: var(--color-yellow);
+		border: 0.01rem var(--color-yellow) solid;
 	}
+
 	@media screen and (max-width: 550px) {
 		max-width: 12rem;
 		height: 1.4rem;

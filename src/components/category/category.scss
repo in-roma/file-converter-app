@@ -5,14 +5,13 @@
 	margin: 0.4rem 0.4rem;
 	border-radius: 5%;
 	cursor: pointer;
-	// background-color: #ebf745;
 	span {
 		font-size: 1.1rem;
 		color: black;
 	}
 	&:hover {
 		color: black;
-		background-color: #14f76a;
+		background-color: var(--color-green);
 		span {
 			color: white;
 		}

@@ -1,5 +1,4 @@
 .create-page {
-	// Element Size & Positionning
 	width: 100%;
 	height: auto;
 	grid-column: 2/3;
@@ -17,7 +16,7 @@
 	height: 4rem;
 	align-self: center;
 	border-bottom: 1px var(--color-border-light) solid;
-	//Child displaye
+	//Child display
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: center;
@@ -52,7 +51,6 @@
 	justify-content: flex-start;
 	align-items: center;
 	border-bottom: 1px var(--color-border-light) solid;
-	// overflow-x: hidden;
 
 	@media screen and (max-width: 700px) {
 		height: 12rem;
@@ -70,6 +68,7 @@
 	align-items: center;
 	justify-content: flex-start;
 	overflow: auto;
+
 	@media screen and (max-width: 700px) {
 		width: 75%;
 	}
